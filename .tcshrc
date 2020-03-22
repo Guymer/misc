@@ -1,0 +1,75 @@
+#!/usr/bin/env tcsh
+
+# Configure TCSH ...
+set autolist
+set histfile = ${HOME}/.tcsh_history
+set history = 1000
+set savehist = 1000
+
+# Set default programs ...
+setenv EDITOR                       "vim"
+setenv PAGER                        "more"
+
+# Set paths ...
+setenv CARTOPY_USER_BACKGROUNDS     "/path/to/NaturalEarthBackgroundImages"
+setenv GEM_HOME                     "${HOME}/.gem"
+setenv GOPATH                       "${HOME}/gocode"
+setenv PATH                         "/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi3/bin:/opt/local/bin:${HOME}/bin:${HOME}/gocode/bin"
+setenv PYTHONPATH                   "/path/to/Repositories:/path/to/modules"
+setenv TMPDIR                       "/tmp"
+
+# Set variables ...
+# NOTE: https://superuser.com/a/1277375
+setenv LANG                         "en_GB.UTF-8"
+setenv NCURSES_NO_UTF8_ACS          "1"
+setenv PINENTRY_USER_DATA           "USE_CURSES=1"
+setenv PYTHONIOENCODING             "UTF-8"
+setenv PYTHONUNBUFFERED             "true"
+
+# Check what OS it is ...
+switch (`uname`)
+    case "Darwin":
+        # Set variables ...
+        setenv JAVA_HOME                    "/Library/Java/JavaVirtualMachines/openjdk13/Contents/Home"
+        setenv MAIL                         "/var/mail/${USER}"
+
+        # Set aliases ...
+        alias ls                            'ls -AGT'
+        alias mktemp                        'mktemp -t tmp'
+        alias rsync                         'rsync --exclude .DS_Store --iconv=utf-8-mac,utf-8 --outbuf=line --timeout=300'
+        breaksw
+    case "FreeBSD":
+        # Set variables ...
+        setenv MAIL                         "/var/mail/${USER}"
+
+        # Set aliases ...
+        alias ls                            'ls -AG -D "%Y-%m-%d %H:%M:%S"'
+        alias mktemp                        'mktemp -t tmp'
+        alias rsync                         'rsync --outbuf=line --timeout=300'
+        breaksw
+    case "Linux":
+        # Set variables ...
+        setenv MAIL                         "/var/spool/mail/${USER}"
+
+        # Set aliases ...
+        alias chcon                         'chcon --preserve-root'
+        alias chgrp                         'chgrp --preserve-root'
+        alias chmod                         'chmod --preserve-root'
+        alias chown                         'chown --preserve-root'
+        alias ls                            'ls --almost-all --color=auto --time-style=long-iso -N'
+        alias mktemp                        'mktemp --tmpdir tmpXXXXXX'
+        alias rsync                         'rsync --outbuf=line --timeout=300'
+        alias shred                         'shred --iterations=25 --random-source=/dev/random --zero'
+        breaksw
+endsw
+
+# Set aliases ...
+alias cp                            'cp -p'
+alias generate_password             'python3 -c "import pyguymer3; print(pyguymer3.generate_password())"'
+alias generate_random_stub          'python3 -c "import pyguymer3; print(pyguymer3.generate_random_stub())"'
+alias gpg                           'gpg --cipher-algo AES256'
+alias lsof                          'lsof +w'
+alias mkdir                         'mkdir -p'
+alias scp                           'scp -p'
+alias wget                          'wget --dns-timeout 5 --connect-timeout 5'
+alias youtube-dl                    'youtube-dl -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'
