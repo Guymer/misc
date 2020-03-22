@@ -1,0 +1,18 @@
+# OS generated files ...
+.directory
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Hide compiled code ...
+__pycache__
+*.so
+f90.cpython-37m-darwin.so
+f90.cpython-37m-darwin.so.dSYM
+
+# Hide output of Pylint ...
+pylint.log
