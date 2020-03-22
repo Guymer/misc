@@ -4,3 +4,4 @@ This repository contains a few random little things that do not fit in anywhere 
 * [my get_iplayer options](options)
 * [my SSH configuration](config)
 * [my wget run control](.wgetrc)
+* [my Vim run control](.vimrc)
