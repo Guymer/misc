@@ -1,0 +1,5 @@
+[user]
+	name = Thomas Guymer
+	email = user@example.com
+[core]
+	pager = less -r
