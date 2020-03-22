@@ -53,6 +53,7 @@ case $(uname) in
         ;;
     "FreeBSD" )
         # Set variables ...
+        export JAVA_HOME="/usr/local/openjdk8"
         export MAIL="/var/mail/$USER"
 
         # Set aliases ...
