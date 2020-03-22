@@ -6,6 +6,8 @@ This repository contains a few random little things that do not fit in anywhere 
 * [my BASH run control](.bashrc)
 * [my get_iplayer options](options)
 * [my Git configuration](.gitconfig)
+* [my Git ignore](.gitignore)
+* [my PyLint run control](.pylintrc)
 * [my SSH configuration](config)
 * [my TCSH run control](.tcshrc)
 * [my Vim run control](.vimrc)
