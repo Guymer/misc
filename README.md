@@ -2,3 +2,4 @@ This repository contains a few random little things that do not fit in anywhere 
 
 * [my Atom text editor configuration](config.cson)
 * [my get_iplayer options](options)
+* [my SSH configuration](config)

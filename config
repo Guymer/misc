@@ -1,0 +1,4 @@
+SendEnv TZ
+
+Host *
+    ServerAliveInterval 300
