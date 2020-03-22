@@ -1,0 +1,61 @@
+"*":
+  "bracket-matcher": {}
+  core:
+    disabledPackages: [
+      "bracket-matcher"
+    ]
+    ignoredNames: [
+      ".git"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      "*.pyc"
+    ]
+    packagesWithKeymapsDisabled: []
+    telemetryConsent: "no"
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+    tabLength: 4
+    tabType: "soft"
+  "linter-gfortran":
+    executable: "mpif90"
+    gfortran_flags: "-ffree-form -ffree-line-length-none -fopenmp -Wall -Wextra -Waliasing -Warray-temporaries -Wconversion-extra -Wimplicit-interface -Wimplicit-procedure -I/path/to/fortranlib"
+  "linter-pylint":
+    disableTimeout: true
+    executablePath: "pylint-3.7"
+    rcFile: "%p/.pylintrc"
+  "linter-ui-default":
+    showPanel: true
+  "markdown-preview":
+    openPreviewInSplitPane: false
+    useGitHubStyle: true
+  minimap:
+    plugins:
+      linter: true
+      linterDecorationsZIndex: 0
+  "spell-check":
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "source.rst"
+      "text.restructuredtext"
+      "text.html.basic"
+    ]
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
+    keepMarkdownLineBreakWhitespace: false
+".basic.html.text":
+  editor:
+    softWrap: true
