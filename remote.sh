@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Change directory ...
+cd $HOME/Repositories
+
+# Loop over repositories ...
+for d in */.git; do
+    # Change directory ...
+    cd $(dirname $d)
+
+    # Print the remotes ...
+    git remote -v
+
+    # Change directory ...
+    cd ../
+done

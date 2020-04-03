@@ -17,3 +17,10 @@ This repository contains a few random little things that do not fit in anywhere 
     * [my get_iplayer options](options)
 * Git Files
     * [my Git ignore](.gitignore)
+* BASH Scripts
+    * [`commit` every Git repository](commit.sh)
+    * [`diff` every Git repository](diff.sh)
+    * [`pull` every Git repository](pull.sh)
+    * [`push` every Git repository](push.sh)
+    * [Print every Git remote](remote.sh)
+    * [Test every Python module](test.sh)
