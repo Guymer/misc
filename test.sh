@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
 # Define binaries and check that they exist ...
-python=python3.7
-pylint=pylint-3.7
-pylintexit=${HOME}/Library/Python/3.7/bin/pylint-exit
-if ! type $python &> /dev/null; then
+python="python3.7"
+pylint="pylint-3.7"
+pylintexit="${HOME}/Library/Python/3.7/bin/pylint-exit"
+if ! type "$python" &> /dev/null; then
     echo "ERROR: the binary defined in \$python does not exist" >&2
     exit 1
 fi
-if ! type $pylint &> /dev/null; then
+if ! type "$pylint" &> /dev/null; then
     echo "ERROR: the binary defined in \$pylint does not exist" >&2
     exit 1
 fi
-if ! type $pylintexit &> /dev/null; then
+if ! type "$pylintexit" &> /dev/null; then
     echo "ERROR: the binary defined in \$pylintexit does not exist" >&2
     echo "       try running \"pip-3.7 install --user pylint-exit\"" >&2
     exit 1
 fi
+
+# Change directory ...
+cd "$HOME/Repositories" || exit 1
 
 # Loop over directories ...
 for d in *; do
@@ -42,8 +45,8 @@ for d in *; do
     echo -n "Testing $d: "
 
     # Clean then import the module ...
-    rm -f $d/*.pyc $d/*/*.pyc
-    rm -rf $d/__pycache__
+    rm -f "$d"/*.pyc "$d"/*/*.pyc
+    rm -rf "$d/__pycache__"
     $python -c "import $d" &> /dev/null
     if [[ $? -ne 0 ]]; then
         echo ""
@@ -52,12 +55,12 @@ for d in *; do
     fi
 
     # Run PyLint on the module ...
-    $pylint --rcfile=$d/.pylintrc $d &> $d/pylint.log || $pylintexit $? &> /dev/null
+    $pylint --rcfile="$d/.pylintrc" "$d" &> "$d/pylint.log" || $pylintexit $? &> /dev/null
     if [[ $? -ne 0 ]]; then
         echo ""
         echo "ERROR: Failed to lint \"$d\"" >&2
         exit 1
     fi
 
-    grep "Your code has been rated at" $d/pylint.log | cut -c 29-
+    grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
 done

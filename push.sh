@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Change directory ...
-cd $HOME/Repositories
+cd "$HOME/Repositories" || exit 1
 
 # Loop over repositories ...
 for d in */.git; do
     # Change directory ...
-    cd $(dirname $d)
+    cd "$(dirname "$d")" || exit 1
 
     # Push everything ...
     git push
