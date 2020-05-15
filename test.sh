@@ -8,9 +8,13 @@
 #   * https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html
 
 # Define binaries and check that they exist ...
-python="python3.7"
-pylint="pylint-3.7"
-pylintexit="${HOME}/Library/Python/3.7/bin/pylint-exit"
+pip="/opt/local/bin/pip-3.7"
+pylint="/opt/local/bin/pylint-3.7"
+python="/opt/local/bin/python3.7"
+if ! type "$pip" &> /dev/null; then
+    echo "ERROR: the binary defined in \$pip does not exist" >&2
+    exit 1
+fi
 if ! type "$python" &> /dev/null; then
     echo "ERROR: the binary defined in \$python does not exist" >&2
     exit 1
@@ -19,6 +23,9 @@ if ! type "$pylint" &> /dev/null; then
     echo "ERROR: the binary defined in \$pylint does not exist" >&2
     exit 1
 fi
+
+# Define derived binaries and check that they exist ...
+pylintexit="$($pip show --files pylint-exit | grep -E "^Location:" | cut -d : -f 2- | tr -d " ")/$($pip show --files pylint-exit | grep -E "bin/pylint-exit\$" | tr -d " ")"
 if ! type "$pylintexit" &> /dev/null; then
     echo "ERROR: the binary defined in \$pylintexit does not exist" >&2
     echo "       try running \"pip-3.7 install --user pylint-exit\"" >&2
