@@ -9,6 +9,9 @@ set number
 " Highlight matching brackets ...
 set showmatch
 
+" Highlight word wrap marker ...
+set colorcolumn=80
+
 " Enable syntax highlighting ...
 syntax on
 
