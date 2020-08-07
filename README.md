@@ -9,6 +9,7 @@ This repository contains a few random little things that do not fit in anywhere 
 * Run Control Files
     * [my BASH run control](.bashrc)
     * [my PyLint run control](.pylintrc)
+    * [my ShellCheck run control](.shellcheckrc)
     * [my TCSH run control](.tcshrc)
     * [my Vim run control](.vimrc)
     * [my wget run control](.wgetrc)
@@ -24,4 +25,5 @@ This repository contains a few random little things that do not fit in anywhere 
     * [`push` every Git repository](push.sh)
     * [`update` every Git repository](update.sh)
     * [Print every Git remote](remote.sh)
+    * [Print every insecure "http://" URL](grep.sh)
     * [Test every Python module](test.sh)
