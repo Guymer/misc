@@ -22,5 +22,6 @@ This repository contains a few random little things that do not fit in anywhere 
     * [`diff` every Git repository](diff.sh)
     * [`pull` every Git repository](pull.sh)
     * [`push` every Git repository](push.sh)
+    * [`update` every Git repository](update.sh)
     * [Print every Git remote](remote.sh)
     * [Test every Python module](test.sh)
