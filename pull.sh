@@ -20,7 +20,7 @@ for d in */.git; do
     cd "$(dirname "$d")" || exit 1
 
     # Pull everything ...
-    git pull --recurse-submodules
+    git pull --ff-only --recurse-submodules
 
     # Change directory ...
     cd ../
