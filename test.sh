@@ -12,14 +12,9 @@ if ! type mktemp &> /dev/null; then
 fi
 
 # Define binaries and check that they exist ...
-pip="/opt/local/bin/pip-3.7"
 pylint="/opt/local/bin/pylint-3.7"
 python="/opt/local/bin/python3.7"
 shellcheck="/opt/local/bin/shellcheck"
-if ! type "$pip" &> /dev/null; then
-    echo "ERROR: the binary defined in \$pip does not exist" >&2
-    exit 1
-fi
 if ! type "$pylint" &> /dev/null; then
     echo "ERROR: the binary defined in \$pylint does not exist" >&2
     exit 1
@@ -30,14 +25,6 @@ if ! type "$python" &> /dev/null; then
 fi
 if ! type "$shellcheck" &> /dev/null; then
     echo "ERROR: the binary defined in \$shellcheck does not exist" >&2
-    exit 1
-fi
-
-# Define derived binaries and check that they exist ...
-pylintexit="$($pip show --files pylint-exit | grep -E "^Location:" | cut -d : -f 2- | tr -d " ")/$($pip show --files pylint-exit | grep -E "bin/pylint-exit\$" | tr -d " ")"
-if ! type "$pylintexit" &> /dev/null; then
-    echo "ERROR: the binary defined in \$pylintexit does not exist" >&2
-    echo "       try running \"$pip install --user pylint-exit\"" >&2
     exit 1
 fi
 
@@ -77,7 +64,7 @@ for d in *; do
             fi
 
             # Run PyLint on the Python module ...
-            $pylint --rcfile="$d/.pylintrc" "$d" &> "$d/pylint.log" || $pylintexit $? &> /dev/null
+            $pylint --rcfile="$d/.pylintrc" "$d" &> "$d/pylint.log"
 
             grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
         else
@@ -98,7 +85,7 @@ for d in *; do
                 echo -n "Testing \"$d\" (as a Python script directory): "
 
                 # Run PyLint on the Python script directory ...
-                $pylint --rcfile="$d/.pylintrc" $(cat "$tmp1") &> "$d/pylint.log" || $pylintexit $? &> /dev/null
+                $pylint --rcfile="$d/.pylintrc" $(cat "$tmp1") &> "$d/pylint.log"
 
                 grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
             fi
@@ -132,10 +119,12 @@ for d in *; do
 
             # Run ShellCheck on the Shell script directory ...
             ln -sf "$d/.shellcheckrc" ".shellcheckrc"
-            $shellcheck -x $(cat "$tmp1") &> "$d/shellcheck.log"
+            if $shellcheck -x $(cat "$tmp1") &> "$d/shellcheck.log"; then
+                echo "perfect"
+            else
+                echo "has issues"
+            fi
             rm ".shellcheckrc"
-
-            echo "done"
         fi
 
         # Clean up ...
