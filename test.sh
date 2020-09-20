@@ -66,7 +66,12 @@ for d in *; do
             # Run PyLint on the Python module ...
             $pylint --rcfile="$d/.pylintrc" "$d" &> "$d/pylint.log"
 
-            grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
+            # Check if it is perfect ...
+            if grep "Your code has been rated at 10.00/10" "$d/pylint.log" &> /dev/null; then
+                echo "perfect"
+            else
+                grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
+            fi
         else
             # Try to find all of the Python scripts that are not part of Git
             # submodules ...
@@ -87,7 +92,12 @@ for d in *; do
                 # Run PyLint on the Python script directory ...
                 $pylint --rcfile="$d/.pylintrc" $(cat "$tmp1") &> "$d/pylint.log"
 
-                grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
+                # Check if it is perfect ...
+                if grep "Your code has been rated at 10.00/10" "$d/pylint.log" &> /dev/null; then
+                    echo "perfect"
+                else
+                    grep "Your code has been rated at" "$d/pylint.log" | cut -c 29-
+                fi
             fi
 
             # Clean up ...
