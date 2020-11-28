@@ -16,16 +16,13 @@ pylint="/opt/local/bin/pylint-3.8"
 python="/opt/local/bin/python3.8"
 shellcheck="/opt/local/bin/shellcheck"
 if ! type "$pylint" &> /dev/null; then
-    echo "ERROR: the binary defined in \$pylint does not exist" >&2
-    exit 1
+    echo "WARNING: the binary defined in \$pylint does not exist (Python checks will be skipped)"
 fi
 if ! type "$python" &> /dev/null; then
-    echo "ERROR: the binary defined in \$python does not exist" >&2
-    exit 1
+    echo "WARNING: the binary defined in \$python does not exist (Python checks will be skipped)"
 fi
 if ! type "$shellcheck" &> /dev/null; then
-    echo "ERROR: the binary defined in \$shellcheck does not exist" >&2
-    exit 1
+    echo "WARNING: the binary defined in \$shellcheck does not exist (Shell checks will be skipped)"
 fi
 
 # Change directory ...
@@ -39,7 +36,11 @@ for d in *; do
     # **************************************************************************
 
     # Print warning if there isn't a PyLint configuration file ...
-    if [[ ! -f $d/.pylintrc ]]; then
+    if ! type "$pylint" &> /dev/null; then
+        false
+    elif ! type "$python" &> /dev/null; then
+        false
+    elif [[ ! -f $d/.pylintrc ]]; then
         echo "WARNING: $d is missing a PyLint configuration file"
     else
         # Check if it is a Python module or if it is just a directory of Python
@@ -108,7 +109,9 @@ for d in *; do
     # **************************************************************************
 
     # Print warning if there isn't a ShellCheck configuration file ...
-    if [[ ! -f $d/.shellcheckrc ]]; then
+    if ! type "$shellcheck" &> /dev/null; then
+        false
+    elif [[ ! -f $d/.shellcheckrc ]]; then
         echo "WARNING: $d is missing a ShellCheck configuration file"
     else
         # Try to find all of the Shell scripts that are not part of Git
