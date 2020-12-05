@@ -16,6 +16,8 @@ cd "$HOME/Repositories" || exit 1
 
 # Loop over repositories ...
 for d in */.git; do
+    echo "Checking \"$(dirname "$d")\" ..."
+
     # Change directory ...
     cd "$(dirname "$d")" || exit 1
 
