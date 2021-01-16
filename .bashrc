@@ -14,7 +14,7 @@ export PAGER="more"
 export CARTOPY_USER_BACKGROUNDS="/path/to/NaturalEarthBackgroundImages"
 export GEM_HOME="$HOME/.gem"
 export GOPATH="$HOME/gocode"
-export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi3/bin:/opt/local/bin:$HOME/bin:$HOME/gocode/bin"
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi/bin:/opt/local/bin:$HOME/bin:$HOME/gocode/bin:$HOME/Library/Python/3.8/bin"
 export PYTHONPATH="/path/to/Repositories:/path/to/modules"
 export TMPDIR="/tmp"
 
@@ -40,7 +40,7 @@ case $(uname) in
         ;;
     "FreeBSD" )
         # Set variables ...
-        export JAVA_HOME="/usr/local/openjdk8"
+        export JAVA_HOME="/usr/local/openjdk11"
         export MAIL="/var/mail/$USER"
 
         # Set aliases ...

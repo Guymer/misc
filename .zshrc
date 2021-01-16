@@ -18,11 +18,11 @@ path+=/usr/bin
 path+=/usr/games
 path+=/usr/local/sbin
 path+=/usr/local/bin
-path+=/usr/local/mpi/openmpi3/bin
+path+=/usr/local/mpi/openmpi/bin
 path+=/opt/local/bin
 path+=$HOME/bin
 path+=$HOME/gocode/bin
-path+=$HOME/Library/Python/3.7/bin
+path+=$HOME/Library/Python/3.8/bin
 
 # Set paths ...
 export CARTOPY_USER_BACKGROUNDS="/path/to/NaturalEarthBackgroundImages"
@@ -53,7 +53,7 @@ case $(uname) in
         ;;
     "FreeBSD" )
         # Set variables ...
-        export JAVA_HOME="/usr/local/openjdk8"
+        export JAVA_HOME="/usr/local/openjdk11"
         export MAIL="/var/mail/$USER"
 
         # Set aliases ...
