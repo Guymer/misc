@@ -36,7 +36,7 @@ switch (`uname`)
         # Set aliases ...
         alias ls                            'ls -AGT'
         alias mktemp                        'mktemp -t tmp'
-        alias rsync                         'rsync --exclude .DS_Store --iconv=utf-8-mac,utf-8 --outbuf=line --timeout=300'
+        alias rsync                         '/opt/local/bin/rsync --exclude .DS_Store --iconv=utf-8-mac,utf-8 --outbuf=line --timeout=300'
         breaksw
     case "FreeBSD":
         # Set variables ...
