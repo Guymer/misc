@@ -75,3 +75,78 @@ alias mkdir="mkdir -p"
 alias scp="scp -p"
 alias wget="wget --dns-timeout 5 --connect-timeout 5"
 alias youtube-dl="youtube-dl -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"
+
+# Define function ...
+checkip() {
+    # NOTE: https://unix.stackexchange.com/a/111852
+    rx='([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'
+    if [[ $1 =~ ^$rx\.$rx\.$rx\.$rx$ ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Define function ...
+getbtime() {
+    case $(uname) in
+        "Darwin" | "FreeBSD" )
+            stat -f %B "$1"
+            ;;
+        "Linux" )
+            echo -n "ERROR: \"birthtime\" is not provided by the stat command on Linux"
+            ;;
+    esac
+}
+
+# Define function ...
+getmd5() {
+    case $(uname) in
+        "Darwin" | "FreeBSD" )
+            md5 -r "$1" | grep -o -E "^[a-z0-9]+"
+            ;;
+        "Linux" )
+            md5sum "$1" | grep -o -E "^[a-z0-9]+"
+            ;;
+    esac
+}
+
+# Define function ...
+getmtime() {
+    case $(uname) in
+        "Darwin" | "FreeBSD" )
+            stat -f %m "$1"
+            ;;
+        "Linux" )
+            stat -c %Y "$1"
+            ;;
+    esac
+}
+
+# Define function ...
+getsize() {
+    case $(uname) in
+        "Darwin" | "FreeBSD" )
+            stat -f %z "$1"
+            ;;
+        "Linux" )
+            stat -c %s "$1"
+            ;;
+    esac
+}
+
+# Define function ...
+trim() {
+    # NOTE: https://stackoverflow.com/a/3352015
+    local var="$*"
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
+    echo -n "$var"
+}
+
+# Define function ...
+urldecode() {
+    # NOTE: https://unix.stackexchange.com/a/187256
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\\x}"
+}
