@@ -25,6 +25,7 @@ path+=$HOME/gocode/bin
 path+=$HOME/Library/Python/3.8/bin
 
 # Set paths ...
+export BASH_ENV="$HOME/.bashrc"
 export CARTOPY_USER_BACKGROUNDS="/path/to/NaturalEarthBackgroundImages"
 export GEM_HOME="$HOME/.gem"
 export GOPATH="$HOME/gocode"

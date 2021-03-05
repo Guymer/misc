@@ -11,6 +11,7 @@ setenv EDITOR                       "vim"
 setenv PAGER                        "more"
 
 # Set paths ...
+setenv BASH_ENV                     "${HOME}/.bashrc"
 setenv CARTOPY_USER_BACKGROUNDS     "/path/to/NaturalEarthBackgroundImages"
 setenv GEM_HOME                     "${HOME}/.gem"
 setenv GOPATH                       "${HOME}/gocode"
