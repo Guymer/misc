@@ -11,6 +11,7 @@ export EDITOR="vim"
 export PAGER="more"
 
 # Set paths ...
+export BASH_ENV="$HOME/.bashrc"
 export CARTOPY_USER_BACKGROUNDS="/path/to/NaturalEarthBackgroundImages"
 export GEM_HOME="$HOME/.gem"
 export GOPATH="$HOME/gocode"
