@@ -59,3 +59,6 @@
 ".basic.html.text":
   editor:
     softWrap: true
+".restructuredtext.text":
+  editor:
+    softWrap: true
