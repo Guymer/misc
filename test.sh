@@ -12,8 +12,8 @@ if ! type mktemp &> /dev/null; then
 fi
 
 # Define binaries and check that they exist ...
-pylint="/opt/local/bin/pylint-3.8"
-python="/opt/local/bin/python3.8"
+pylint="/opt/local/bin/pylint-3.9"
+python="/opt/local/bin/python3.9"
 shellcheck="/opt/local/bin/shellcheck"
 if ! type "${pylint}" &> /dev/null; then
     echo "WARNING: the binary defined in \$pylint does not exist (Python checks will be skipped)"
