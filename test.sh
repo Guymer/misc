@@ -45,7 +45,7 @@ for d in *; do
     else
         # Check if it is a Python module or if it is just a directory of Python
         # scripts ...
-        if [[ -f $d/__init__.py ]]; then
+        if [[ -f $d/$(basename "${d}")/__init__.py ]]; then
             # Assume this module is Python 3.x but if it appears that there is a
             # separate explicit Python 3.x version of this module then assume
             # that this module is in fact Python 2.x and skip it ...
@@ -65,7 +65,7 @@ for d in *; do
             fi
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" "${d}" &> "${d}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" "${d}/${d}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
