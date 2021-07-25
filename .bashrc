@@ -74,7 +74,6 @@ alias lsof="lsof +w"
 alias mkdir="mkdir -p"
 alias scp="scp -p"
 alias wget="wget --dns-timeout 5 --connect-timeout 5"
-alias youtube-dl="youtube-dl -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"
 
 # Define function ...
 checkip() {
