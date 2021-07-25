@@ -3,9 +3,9 @@ This repository contains a few random little things that do not fit in anywhere 
 ## Contents
 
 * Configuration Files
-    * [my Atom configuration](config.cson)
+    * [my Atom configuration](.atom/config.cson)
     * [my Git configuration](.gitconfig)
-    * [my SSH configuration](config)
+    * [my SSH configuration](.ssh/config)
 * Run Control Files
     * [my BASH run control](.bashrc)
     * [my PyLint run control](.pylintrc)
@@ -15,7 +15,7 @@ This repository contains a few random little things that do not fit in anywhere 
     * [my wget run control](.wgetrc)
     * [my ZSH run control](.zshrc)
 * Option Files
-    * [my get_iplayer options](options)
+    * [my get_iplayer options](.get_iplayer/options)
 * Git Files
     * [my Git ignore](.gitignore)
 * BASH Scripts
