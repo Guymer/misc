@@ -44,7 +44,7 @@ export PYTHONUNBUFFERED="true"
 case $(uname) in
     "Darwin" )
         # Set variables ...
-        export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk13/Contents/Home"
+        export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk17/Contents/Home"
         export MAIL="/var/mail/$USER"
 
         # Set aliases ...
