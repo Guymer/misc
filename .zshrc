@@ -22,7 +22,7 @@ path+=/usr/local/mpi/openmpi/bin
 path+=/opt/local/bin
 path+=$HOME/bin
 path+=$HOME/gocode/bin
-path+=$HOME/Library/Python/3.8/bin
+path+=$HOME/Library/Python/3.9/bin
 
 # Set paths ...
 export BASH_ENV="$HOME/.bashrc"

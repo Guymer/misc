@@ -15,7 +15,7 @@ setenv BASH_ENV                     "${HOME}/.bashrc"
 setenv CARTOPY_USER_BACKGROUNDS     "/path/to/NaturalEarthBackgroundImages"
 setenv GEM_HOME                     "${HOME}/.gem"
 setenv GOPATH                       "${HOME}/gocode"
-setenv PATH                         "/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi/bin:/opt/local/bin:${HOME}/bin:${HOME}/gocode/bin:${HOME}/Library/Python/3.8/bin"
+setenv PATH                         "/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi/bin:/opt/local/bin:${HOME}/bin:${HOME}/gocode/bin:${HOME}/Library/Python/3.9/bin"
 setenv PYTHONPATH                   "/path/to/Repositories:/path/to/modules"
 setenv TMPDIR                       "/tmp"
 
