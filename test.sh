@@ -91,7 +91,7 @@ for d in *; do
                 printf "%-60s : " "Testing \"${d}\" (as a Python script directory)"
 
                 # Run PyLint on the Python script directory ...
-                ${pylint} --rcfile="${d}/.pylintrc" $(cat "${tmp1}") &> "${d}/pylint.log"
+                ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R1732 $(cat "${tmp1}") &> "${d}/pylint.log"
 
                 # Check if it is perfect ...
                 if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
