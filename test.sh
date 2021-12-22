@@ -65,7 +65,7 @@ for d in *; do
             fi
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" "${d}/${d}" &> "${d}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R1732 "${d}/${d}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
@@ -80,10 +80,10 @@ for d in *; do
             tmp2="$(mktemp)"
             find "${d}" -type f -name "*.py" | grep -v -F "/build/" | sort > "${tmp1}"
             if [[ -f $d/.gitmodules ]]; then
-                for m in $(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2); do
+                while IFS= read -r m; do
                     grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
                     cp "${tmp2}" "${tmp1}"
-                done
+                done < <(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2 | tr -d " ")
             fi
 
             # Check that there are some Python scripts ...
@@ -120,10 +120,10 @@ for d in *; do
         tmp2="$(mktemp)"
         find "${d}" -type f -name "*.sh" | grep -v -F "/build/" | sort > "${tmp1}"
         if [[ -f $d/.gitmodules ]]; then
-            for m in $(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2); do
+            while IFS= read -r m; do
                 grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
                 cp "${tmp2}" "${tmp1}"
-            done
+            done < <(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2 | tr -d " ")
         fi
 
         # Check that there are some Shell scripts ...
