@@ -12,9 +12,11 @@ except:
     raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
 
 # Load list of standard modules ...
-standardModules = json.load(open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "Python 3.7 Standard Modules.json"), "rt"))
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/Python 3.9 Standard Modules.json", "rt", encoding = "utf-8") as fobj:
+    standardModules = json.load(fobj)
 
 # Append common non-standard modules that I do not want to be warned about ...
+standardModules.append("f90")
 standardModules.append("funcs")
 standardModules.append("web_mod")
 
@@ -29,18 +31,19 @@ for rname in sorted(glob.glob("*/README.md")):
 
     # Initialize list of sub-paths to ignore ...
     ipaths = [
-        os.path.join(dname, ".git"),
-        os.path.join(dname, "build"),
+        f"{dname}/.git",
+        f"{dname}/build",
     ]
 
     # Deduce .gitmodules file name, check if it exists and populate list with
     # paths to ignore if it does ...
-    mname = os.path.join(dname, ".gitmodules")
+    mname = f"{dname}/.gitmodules"
     if os.path.exists(mname):
-        for line in open(mname, "rt"):
-            if not line.strip().startswith("path = "):
-                continue
-            ipaths.append(os.path.join(dname, "=".join(line.strip().split("=")[1:]).strip()))
+        with open(mname, "rt", encoding = "utf-8") as fobj:
+            for line in fobj:
+                if not line.strip().startswith("path = "):
+                    continue
+                ipaths.append(f'{dname}/{"=".join(line.strip().split("=")[1:]).strip()}')
 
     # **************************************************************************
 
@@ -64,15 +67,16 @@ for rname in sorted(glob.glob("*/README.md")):
 
         # Find all the non-standard modules which are imported and append the
         # missing ones to the list ...
-        for line in open(pname, "rt"):
-            if not line.strip().startswith("import "):
-                continue
-            module = line.strip().split(" ")[1].split(".")[0]
-            if module in standardModules:
-                continue
-            if module in modules:
-                continue
-            modules.append(module)
+        with open(pname, "rt", encoding = "utf-8") as fobj:
+            for line in fobj:
+                if not line.strip().startswith("import "):
+                    continue
+                module = line.strip().split(" ")[1].split(".")[0]
+                if module in standardModules:
+                    continue
+                if module in modules:
+                    continue
+                modules.append(module)
 
     # Skip this README if the repository does not import any non-standard
     # modules ...
@@ -82,7 +86,8 @@ for rname in sorted(glob.glob("*/README.md")):
     # **************************************************************************
 
     # Load README ...
-    lines = open(rname, "rt").readlines()
+    with open(rname, "rt", encoding = "utf-8") as fobj:
+        lines = fobj.readlines()
 
     # Loop over imported non-standard modules ...
     for module in sorted(modules):
