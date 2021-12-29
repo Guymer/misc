@@ -11,11 +11,10 @@ if ! type mktemp &> /dev/null; then
     exit 1
 fi
 
-# NOTE: Currently, the following three PyLint messages are hard-coded to be
-#       ignored (so that I can concentrate on fixing all the others first):
+# NOTE: Currently, the following two PyLint checks are hard-coded to be disabled
+#       (so that I can concentrate on fixing all the others first):
 #         * C0209 - Formatting a regular string which could be a f-string
 #         * R0801 - Similar lines in %s files
-#         * R1732 - Consider using 'with' for resource-allocating operations
 
 # Define binaries and check that they exist ...
 pylint="/opt/local/bin/pylint-3.9"
@@ -71,7 +70,7 @@ for d in *; do
             fi
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R0801,R1732 "${d}/${d}" &> "${d}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R0801 "${d}/${d}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
@@ -97,7 +96,7 @@ for d in *; do
                 printf "%-60s : " "Testing \"${d}\" (as a Python script directory)"
 
                 # Run PyLint on the Python script directory ...
-                ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R0801,R1732 $(cat "${tmp1}") &> "${d}/pylint.log"
+                ${pylint} --rcfile="${d}/.pylintrc" --disable=C0209,R0801 $(cat "${tmp1}") &> "${d}/pylint.log"
 
                 # Check if it is perfect ...
                 if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
