@@ -8,7 +8,7 @@ This repository contains a few random little things that do not fit in anywhere 
     * [my get_iplayer options](.get_iplayer/options)
     * [my Git configuration](.gitconfig)
     * [my SSH configuration](.ssh/config)
-    * [my youtube-dl configuration](.config/youtube-dl/config)
+    * [my yt-dlp configuration](.config/yt-dlp/config)
 * Run Control Files
     * [my BASH run control](.bashrc)
     * [my PyLint run control](.pylintrc)

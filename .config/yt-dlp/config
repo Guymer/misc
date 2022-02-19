@@ -1,4 +1,4 @@
---download-archive ~/.config/youtube-dl/download_history
+--download-archive ~/.config/yt-dlp/download_history
 --format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
 --ignore-errors
 --limit-rate 20M
