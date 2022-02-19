@@ -72,6 +72,8 @@ for rname in sorted(glob.glob("*/README.md")):
                 if not line.strip().startswith("import "):
                     continue
                 module = line.strip().split(" ")[1].split(".")[0]
+                if module == dname:
+                    continue
                 if module in standardModules:
                     continue
                 if module in modules:
