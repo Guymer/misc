@@ -4,10 +4,11 @@ This repository contains a few random little things that do not fit in anywhere 
 
 * Configuration & Option Files
     * [my Atom configuration](.atom/config.cson)
-    * [my EditorConfig options](.editorconfig)
+    * [my EditorConfig configuration](.editorconfig)
     * [my get_iplayer options](.get_iplayer/options)
     * [my Git configuration](.gitconfig)
     * [my SSH configuration](.ssh/config)
+    * [my VS Code settings](.vscode/settings.json)
     * [my yt-dlp configuration](.config/yt-dlp/config)
 * Run Control Files
     * [my BASH run control](.bashrc)
