@@ -22,12 +22,12 @@ This repository contains a few random little things that do not fit in anywhere 
 * Git Files
     * [my Git ignore](.gitignore)
 * BASH Scripts
-    * [`branch` every Git repository](branch.sh)
     * [`commit` every Git repository](commit.sh)
     * [`diff` every Git repository](diff.sh)
     * [`pull` every Git repository](pull.sh)
     * [`push` every Git repository](push.sh)
     * [`update` every Git repository](update.sh)
+    * [Print every Git branch](branch.sh)
     * [Print every Git remote](remote.sh)
     * [Print every insecure "http://" URL](grep.sh)
     * [Test every Python module](test.sh)
