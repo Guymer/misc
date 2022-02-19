@@ -2,11 +2,12 @@ This repository contains a few random little things that do not fit in anywhere 
 
 ## Contents
 
-* Configuration & Option Files
+* Configuration, Option & Settings Files
     * [my Atom configuration](.atom/config.cson)
     * [my EditorConfig configuration](.editorconfig)
     * [my get_iplayer options](.get_iplayer/options)
     * [my Git configuration](.gitconfig)
+    * [my GitHub funding](.github/FUNDING.yml)
     * [my SSH configuration](.ssh/config)
     * [my VS Code settings](.vscode/settings.json)
     * [my yt-dlp configuration](.config/yt-dlp/config)
@@ -21,6 +22,7 @@ This repository contains a few random little things that do not fit in anywhere 
 * Git Files
     * [my Git ignore](.gitignore)
 * BASH Scripts
+    * [`branch` every Git repository](branch.sh)
     * [`commit` every Git repository](commit.sh)
     * [`diff` every Git repository](diff.sh)
     * [`pull` every Git repository](pull.sh)
