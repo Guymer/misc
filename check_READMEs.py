@@ -18,6 +18,7 @@ with open(f"{os.path.dirname(os.path.realpath(__file__))}/Python 3.9 Standard Mo
 # Append common non-standard modules that I do not want to be warned about ...
 standardModules.append("f90")
 standardModules.append("funcs")
+standardModules.append("sphinx_rtd_theme")
 standardModules.append("web_mod")
 
 # Loop over READMEs ...
