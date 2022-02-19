@@ -4,6 +4,7 @@ This repository contains a few random little things that do not fit in anywhere 
 
 * Configuration & Option Files
     * [my Atom configuration](.atom/config.cson)
+    * [my EditorConfig options](.editorconfig)
     * [my get_iplayer options](.get_iplayer/options)
     * [my Git configuration](.gitconfig)
     * [my SSH configuration](.ssh/config)
