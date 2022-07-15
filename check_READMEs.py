@@ -12,7 +12,7 @@ except:
     raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
 
 # Load list of standard modules ...
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/Python 3.9 Standard Modules.json", "rt", encoding = "utf-8") as fobj:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/Python 3.10 Standard Modules.json", "rt", encoding = "utf-8") as fobj:
     standardModules = json.load(fobj)
 
 # Append common non-standard modules that I do not want to be warned about ...
