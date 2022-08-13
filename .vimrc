@@ -18,3 +18,6 @@ syntax on
 " Sort out tabs ...
 set expandtab
 set tabstop=4
+
+" Don't be clever when selecting text with the mouse ...
+set mouse-=a
