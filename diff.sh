@@ -22,6 +22,7 @@ for d in */.git; do
     # Clear the terminal and then print the difference ...
     clear
     git diff
+    # git diff --ignore-all-space
     # git diff --ignore-all-space --word-diff
 
     # Wait for the user to be ready to proceed and then clear the terminal again ...
