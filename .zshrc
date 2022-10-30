@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
 # Configure ZSH ...
-export HISTCONTROL="erasedups"
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
 
 # Set default programs ...
 export EDITOR="vim"
