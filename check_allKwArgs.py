@@ -78,6 +78,17 @@ if __name__ == "__main__":
 
     # **************************************************************************
 
+    # Loop over functions and their keyword arguments ...
+    for func, keywords in funcs.items():
+        # Skip this function if its keyword arguments are already sorted ...
+        if keywords == sorted(keywords):
+            continue
+
+        # Print ...
+        print(f"The keyword arguments of \"{func}()\" are not sorted.")
+
+    # **************************************************************************
+
     # Loop over files in folder ...
     for fname in pyguymer3.return_file_list(args.dname):
         # Skip files which are not Python scripts ...
@@ -122,4 +133,4 @@ if __name__ == "__main__":
                         continue
 
                     # Print ...
-                    print(f"\"{fname}\" calls \"{node.func.id}()\" but does not pass \"{keyword}\"")
+                    print(f"\"{fname}\" calls \"{node.func.id}()\" but does not pass \"{keyword} = \".")
