@@ -60,13 +60,18 @@ if __name__ == "__main__":
             if nKwArgs == 0:
                 continue
 
+            # Initialize flag ...
+            kwArgCheck = False
+
             # Loop over keyword arguments ...
             for iKwArg in range(nKwArgs):
                 # Deduce index to positional argument ...
                 iPosArg = nPosArgs - nKwArgs + iKwArg
 
-                # Skip if this keyword argument is the positional argument check ...
+                # Skip this keyword argument if it is the positional argument
+                # check ...
                 if body.args.args[iPosArg].arg in ("kwArgCheck",):
+                    kwArgCheck = True
                     continue
 
                 # Add this function to the database ...
@@ -75,6 +80,11 @@ if __name__ == "__main__":
 
                 # Append this keyword argument to the database ...
                 funcs[body.name].append(body.args.args[iPosArg].arg)
+
+            # Check flag ...
+            if not kwArgCheck:
+                # Print ...
+                print(f"\"{body.name}()\" in \"{fname}\" does not have a keyword argument check.")
 
     # **************************************************************************
 
@@ -133,4 +143,4 @@ if __name__ == "__main__":
                         continue
 
                     # Print ...
-                    print(f"\"{fname}\" calls \"{node.func.id}()\" but does not pass \"{keyword} = \".")
+                    print(f"\"{body.name}()\" in \"{fname}\" calls \"{node.func.id}()\" but does not pass \"{keyword} = \".")
