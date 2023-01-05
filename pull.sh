@@ -23,6 +23,7 @@ for d in */.git; do
 
     # Pull everything ...
     git pull --ff-only --recurse-submodules=yes
+    git submodule init
 
     # Change directory ...
     cd ../
