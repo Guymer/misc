@@ -36,7 +36,7 @@ cd "${HOME}/Repositories" || exit 1
 # Loop over directories ...
 for d in *; do
     # Skip ones that do not exist ...
-    [[ ! -d $d ]] && continue
+    [[ ! -d ${d} ]] && continue
 
     # **************************************************************************
 
@@ -45,12 +45,12 @@ for d in *; do
         false
     elif ! type "${python}" &> /dev/null; then
         false
-    elif [[ ! -f $d/.pylintrc ]]; then
+    elif [[ ! -f ${d}/.pylintrc ]]; then
         echo "WARNING: \"${d}\" is missing a PyLint configuration file"
     else
         # Check if it is a Python module or if it is just a directory of Python
         # scripts ...
-        if [[ -f $d/$(basename "${d}")/__init__.py ]]; then
+        if [[ -f ${d}/$(basename "${d}")/__init__.py ]]; then
             # Assume this module is Python 3.x but if it appears that there is a
             # separate explicit Python 3.x version of this module then assume
             # that this module is in fact Python 2.x and skip it ...
@@ -84,7 +84,7 @@ for d in *; do
             tmp1="$(mktemp)"
             tmp2="$(mktemp)"
             find "${d}" -type f -name "*.py" | grep -v -F "/build/" | sort > "${tmp1}"
-            if [[ -f $d/.gitmodules ]]; then
+            if [[ -f ${d}/.gitmodules ]]; then
                 while IFS= read -r m; do
                     grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
                     cp "${tmp2}" "${tmp1}"
@@ -116,7 +116,7 @@ for d in *; do
     # Print warning if there isn't a ShellCheck configuration file ...
     if ! type "${shellcheck}" &> /dev/null; then
         false
-    elif [[ ! -f $d/.shellcheckrc ]]; then
+    elif [[ ! -f ${d}/.shellcheckrc ]]; then
         echo "WARNING: \"${d}\" is missing a ShellCheck configuration file"
     else
         # Try to find all of the Shell scripts that are not part of Git
@@ -124,7 +124,7 @@ for d in *; do
         tmp1="$(mktemp)"
         tmp2="$(mktemp)"
         find "${d}" -type f -name "*.sh" | grep -v -F "/build/" | sort > "${tmp1}"
-        if [[ -f $d/.gitmodules ]]; then
+        if [[ -f ${d}/.gitmodules ]]; then
             while IFS= read -r m; do
                 grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
                 cp "${tmp2}" "${tmp1}"

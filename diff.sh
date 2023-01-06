@@ -12,12 +12,12 @@ if ! type git &> /dev/null; then
 fi
 
 # Change directory ...
-cd "$HOME/Repositories" || exit 1
+cd "${HOME}/Repositories" || exit 1
 
 # Loop over repositories ...
 for d in */.git; do
     # Change directory ...
-    cd "$(dirname "$d")" || exit 1
+    cd "$(dirname "${d}")" || exit 1
 
     # Clear the terminal and then print the difference ...
     clear
@@ -30,5 +30,5 @@ for d in */.git; do
     clear
 
     # Change directory ...
-    cd ../
+    cd "${HOME}/Repositories" || exit 1
 done

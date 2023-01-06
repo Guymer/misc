@@ -12,18 +12,18 @@ if ! type git &> /dev/null; then
 fi
 
 # Change directory ...
-cd "$HOME/Repositories" || exit 1
+cd "${HOME}/Repositories" || exit 1
 
 # Loop over repositories ...
 for d in */.git; do
-    echo "Checking \"$(dirname "$d")\" ..."
+    echo "Checking \"$(dirname "${d}")\" ..."
 
     # Change directory ...
-    cd "$(dirname "$d")" || exit 1
+    cd "$(dirname "${d}")" || exit 1
 
     # Push everything ...
     git push
 
     # Change directory ...
-    cd ../
+    cd "${HOME}/Repositories" || exit 1
 done
