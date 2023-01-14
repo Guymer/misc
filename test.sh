@@ -38,6 +38,14 @@ for d in *; do
     # Skip ones that do not exist ...
     [[ ! -d ${d} ]] && continue
 
+    # Check if the user passed an argument ...
+    if [[ -n ${1} ]]; then
+        # Skip this directory if it is not the one the user passed ...
+        if [[ ${d} != "${1}" ]]; then
+            continue
+        fi
+    fi
+
     # **************************************************************************
 
     # Print warning if there isn't a PyLint configuration file ...
