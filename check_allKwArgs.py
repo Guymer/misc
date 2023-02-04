@@ -51,40 +51,34 @@ if __name__ == "__main__":
             if not isinstance(body, ast.FunctionDef):
                 continue
 
-            # Find out how many positional and keyword arguments there are, and
-            # skip if there aren't any ...
-            nPosArgs = len(body.args.args)
-            nKwArgs = len(body.args.defaults)
-            if nPosArgs == 0:
-                continue
+            # Find out how many arguments, positional-only arguments and
+            # keyword-only arguments there are ...
+            nArgs = len(body.args.args)
+            nKwArgs = len(body.args.kwonlyargs)
+            nPosArgs = len(body.args.posonlyargs)
+
+            # Check if there are any arguments ...
+            if nArgs != 0:
+                # Check if there are any keyword-only or positional-only
+                # arguments ...
+                if nKwArgs != 0 or nPosArgs != 0:
+                    # Cry ...
+                    raise Exception(f"\"{fname}\" has a confusing argument list") from None
+
+            # Skip if there aren't any keyword-only or positional-only arguments ...
             if nKwArgs == 0:
                 continue
+            if nPosArgs == 0:
+                continue
 
-            # Initialize flag ...
-            kwArgCheck = False
+            # Add this function to the database ...
+            if body.name not in funcs:
+                funcs[body.name] = []
 
             # Loop over keyword arguments ...
             for iKwArg in range(nKwArgs):
-                # Deduce index to positional argument ...
-                iPosArg = nPosArgs - nKwArgs + iKwArg
-
-                # Skip this keyword argument if it is the positional argument
-                # check ...
-                if body.args.args[iPosArg].arg in ("kwArgCheck",):
-                    kwArgCheck = True
-                    continue
-
-                # Add this function to the database ...
-                if body.name not in funcs:
-                    funcs[body.name] = []
-
                 # Append this keyword argument to the database ...
-                funcs[body.name].append(body.args.args[iPosArg].arg)
-
-            # Check flag ...
-            if not kwArgCheck:
-                # Print ...
-                print(f"\"{body.name}()\" in \"{fname}\" does not have a keyword argument check.")
+                funcs[body.name].append(body.args.kwonlyargs[iKwArg].arg)
 
     # **************************************************************************
 
