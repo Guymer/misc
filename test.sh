@@ -66,7 +66,7 @@ for d in *; do
                 continue
             fi
 
-            printf "%-60s : " "Testing \"${d}\" (as a Python module)"
+            printf "%-80s : " "Testing \"${d}\" (as a Python module)"
 
             # Clean then import the Python module ...
             find "${d}" -type f -name "*.pyc" -delete
@@ -101,7 +101,7 @@ for d in *; do
 
             # Check that there are some Python scripts ...
             if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-                printf "%-60s : " "Testing \"${d}\" (as a Python script directory)"
+                printf "%-80s : " "Testing \"${d}\" (as a Python script directory)"
 
                 # Run PyLint on the Python script directory ...
                 ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 $(cat "${tmp1}") &> "${d}/pylint.log"
@@ -141,7 +141,7 @@ for d in *; do
 
         # Check that there are some Shell scripts ...
         if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-            printf "%-60s : " "Testing \"${d}\" (as a Shell script directory)"
+            printf "%-80s : " "Testing \"${d}\" (as a Shell script directory)"
 
             # Run ShellCheck on the Shell script directory ...
             ln -sf "${d}/.shellcheckrc" ".shellcheckrc"
