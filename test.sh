@@ -48,6 +48,10 @@ for g in */.git */*/*/*/*/*/.git; do
         fi
     fi
 
+    # Try to find the parent module in the repository and create short-hand ...
+    init="$(find "${d}" -type f -name "__init__.py" | sort | head -n 1)"
+    prefix="$(dirname "${init}")"
+
     # **************************************************************************
 
     # Print warning if there isn't a PyLint configuration file ...
@@ -58,29 +62,54 @@ for g in */.git */*/*/*/*/*/.git; do
     elif [[ ! -f ${d}/.pylintrc ]]; then
         echo "WARNING: \"${d}\" is missing a PyLint configuration file"
     else
-        # Check if it is a Python module or if it is just a directory of Python
-        # scripts ...
-        if [[ -f ${d}/$(basename "${d}")/__init__.py ]]; then
-            # Assume this module is Python 3.x but if it appears that there is a
-            # separate explicit Python 3.x version of this module then assume
-            # that this module is in fact Python 2.x and skip it ...
-            if [[ -d ${d}3 ]]; then
-                continue
-            fi
+        # Check if it is a Python module ...
+        if [[ -f ${init} ]]; then
+            printf "%-120s : " "Testing \"${prefix}\" (as a Python module)"
 
-            printf "%-120s : " "Testing \"${d}\" (as a Python module)"
-
-            # Clean then import the Python module ...
-            find "${d}" -type f -name "*.pyc" -delete
-            find "${d}" -type d -name "__pycache__" -delete
-            if ! ${python} -c "import ${d}" &> /dev/null; then
-                echo ""
-                echo "ERROR: Failed to import \"${d}\"" >&2
-                exit 1
-            fi
+            # Clean the Python module ...
+            find "${prefix}" -type f -name "*.pyc" -delete
+            find "${prefix}" -type d -name "__pycache__" -delete
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 "${d}/${d}" &> "${d}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 "${prefix}" &> "${prefix}/pylint.log"
+
+            # Check if it is perfect ...
+            if grep -F "Your code has been rated at 10.00/10" "${prefix}/pylint.log" &> /dev/null; then
+                echo "perfect"
+            else
+                grep -F "Your code has been rated at" "${prefix}/pylint.log" | cut -c 29-
+            fi
+        fi
+    fi
+
+    # **************************************************************************
+
+    # Print warning if there isn't a PyLint configuration file ...
+    if ! type "${pylint}" &> /dev/null; then
+        false
+    elif ! type "${python}" &> /dev/null; then
+        false
+    elif [[ ! -f ${d}/.pylintrc ]]; then
+        echo "WARNING: \"${d}\" is missing a PyLint configuration file"
+    else
+        # Try to find all of the Python scripts that are not part of Git
+        # submodules or the Python module ...
+        tmp1="$(mktemp)"
+        tmp2="$(mktemp)"
+        find "${d}" -type f -name "*.py" | grep -v -F "/.git/" | grep -v -F "/build/" | grep -v -E "^${prefix}/" | sort > "${tmp1}"
+        if [[ -f ${d}/.gitmodules ]]; then
+            while IFS= read -r m; do
+                grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
+                cp "${tmp2}" "${tmp1}"
+            done < <(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2 | tr -d " ")
+        fi
+
+        # Check that there are some Python scripts ...
+        if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
+            printf "%-120s : " "Testing \"${d}\" (as a Python script directory)"
+
+            # Run PyLint on the Python script directory ...
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 $(cat "${tmp1}") &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
@@ -88,37 +117,10 @@ for g in */.git */*/*/*/*/*/.git; do
             else
                 grep -F "Your code has been rated at" "${d}/pylint.log" | cut -c 29-
             fi
-        else
-            # Try to find all of the Python scripts that are not part of Git
-            # submodules ...
-            tmp1="$(mktemp)"
-            tmp2="$(mktemp)"
-            find "${d}" -type f -name "*.py" | grep -v -F "/build/" | sort > "${tmp1}"
-            if [[ -f ${d}/.gitmodules ]]; then
-                while IFS= read -r m; do
-                    grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
-                    cp "${tmp2}" "${tmp1}"
-                done < <(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2 | tr -d " ")
-            fi
-
-            # Check that there are some Python scripts ...
-            if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-                printf "%-120s : " "Testing \"${d}\" (as a Python script directory)"
-
-                # Run PyLint on the Python script directory ...
-                ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 $(cat "${tmp1}") &> "${d}/pylint.log"
-
-                # Check if it is perfect ...
-                if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
-                    echo "perfect"
-                else
-                    grep -F "Your code has been rated at" "${d}/pylint.log" | cut -c 29-
-                fi
-            fi
-
-            # Clean up ...
-            rm "${tmp1}" "${tmp2}"
         fi
+
+        # Clean up ...
+        rm "${tmp1}" "${tmp2}"
     fi
 
     # **************************************************************************
@@ -133,7 +135,7 @@ for g in */.git */*/*/*/*/*/.git; do
         # submodules ...
         tmp1="$(mktemp)"
         tmp2="$(mktemp)"
-        find "${d}" -type f -name "*.sh" | grep -v -F "/build/" | sort > "${tmp1}"
+        find "${d}" -type f -name "*.sh" | grep -v -F "/.git/" | grep -v -F "/build/" | sort > "${tmp1}"
         if [[ -f ${d}/.gitmodules ]]; then
             while IFS= read -r m; do
                 grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
