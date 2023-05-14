@@ -109,7 +109,8 @@ for g in */.git */*/*/*/*/*/.git; do
             printf "%-120s : " "Testing \"${d}\" (as a Python script directory)"
 
             # Run PyLint on the Python script directory ...
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 $(cat "${tmp1}") &> "${d}/pylint.log"
+            readarray -t fnames < "${tmp1}"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 "${fnames[@]}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
@@ -149,7 +150,8 @@ for g in */.git */*/*/*/*/*/.git; do
 
             # Run ShellCheck on the Shell script directory ...
             ln -sf "${d}/.shellcheckrc" ".shellcheckrc"
-            if ${shellcheck} -x $(cat "${tmp1}") &> "${d}/shellcheck.log"; then
+            readarray -t fnames < "${tmp1}"
+            if ${shellcheck} -x "${fnames[@]}" &> "${d}/shellcheck.log"; then
                 echo "perfect"
             else
                 echo "has issues"
