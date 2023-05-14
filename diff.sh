@@ -26,6 +26,7 @@ for d in */.git; do
     # git diff --ignore-all-space --word-diff
 
     # Wait for the user to be ready to proceed and then clear the terminal again ...
+    # shellcheck disable=SC2162
     read -p "Press enter to continue ..."
     clear
 

@@ -18,6 +18,7 @@ for d in */.git; do
     grep --color -n "http://" "${fnames[@]}" 2> /dev/null
 
     # Wait for the user to be ready to proceed and then clear the terminal again ...
+    # shellcheck disable=SC2162
     read -p "Press enter to continue ..."
     clear
 done
