@@ -73,10 +73,10 @@ if __name__ == "__main__":
                     continue
 
                 # Skip this node if it sets the argument type ...
-                skip = True
+                skip = False
                 for keyword in node.keywords:
                     if keyword.arg == "type":
-                        skip = False
+                        skip = True
                         break
                 if skip:
                     continue
