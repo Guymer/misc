@@ -24,6 +24,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "dname",
         help = "the folder to check",
+        type = str,
     )
     args = parser.parse_args()
 
