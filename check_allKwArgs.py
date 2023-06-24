@@ -39,6 +39,14 @@ if __name__ == "__main__":
         if not fname.endswith(".py"):
             continue
 
+        # Skip Python scripts which are known Git submodules ...
+        if "/openflights/" in fname:
+            continue
+        if "/stations/" in fname:
+            continue
+        if "/validator/" in fname:
+            continue
+
         # Load the Python script ...
         with open(fname, "rt", encoding = "utf-8") as fObj:
             src = fObj.read()
