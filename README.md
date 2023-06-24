@@ -33,7 +33,7 @@ This repository contains a few random little things that do not fit in anywhere 
     * [Test every Python module](test.sh)
 * Python Scripts
     * [Check every `parser.add_argument()` specifies the type](check_allAddArguments.py)
-    * [Check every function call specifies keyword arguments](check_allKwArgs.py)
+    * [Check every function call specifies keyword arguments](check_allKeywordArguments.py)
     * [Check every README has links to its dependencies](check_READMEs.py)
 
 ## Dependencies
