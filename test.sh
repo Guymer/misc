@@ -96,7 +96,7 @@ for g in */.git */*/*/*/*/*/.git; do
         # submodules or the Python module ...
         tmp1="$(mktemp)"
         tmp2="$(mktemp)"
-        find "${d}" -type f -name "*.py" | grep -v -F "/.git/" | grep -v -F "/build/" | grep -v -E "^${prefix}/" | sort > "${tmp1}"
+        find "${d}" -type f -name "*.py" | grep -v -F "/.git/" | grep -v -F "/build/" | grep -v -F "/_build/" | grep -v -E "^${prefix}/" | sort > "${tmp1}"
         if [[ -f ${d}/.gitmodules ]]; then
             while IFS= read -r m; do
                 grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
@@ -136,7 +136,7 @@ for g in */.git */*/*/*/*/*/.git; do
         # submodules ...
         tmp1="$(mktemp)"
         tmp2="$(mktemp)"
-        find "${d}" -type f -name "*.sh" | grep -v -F "/.git/" | grep -v -F "/build/" | sort > "${tmp1}"
+        find "${d}" -type f -name "*.sh" | grep -v -F "/.git/" | grep -v -F "/build/" | grep -v -F "/_build/" | sort > "${tmp1}"
         if [[ -f ${d}/.gitmodules ]]; then
             while IFS= read -r m; do
                 grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
