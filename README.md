@@ -41,3 +41,77 @@ This repository contains a few random little things that do not fit in anywhere 
 This collection requires the following Python modules to be installed and available in your `PYTHONPATH`.
 
 * [pyguymer3](https://github.com/Guymer/PyGuymer3)
+
+## MatPlotLib Figure Sizes
+
+The two "standard" 4K sizes are:
+
+| Size | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
+|---|---|---|---|
+| 3,840 px × 2,160 px | 1.778…:1 = 16:9 = 4²:3² | 4K UHD | Wide Screen |
+| 4,096 px × 2,160 px | 1.896…:1 | 4K DCI |  |
+
+There is a third "standard" 4K-ish size with a height of 2,160 px:
+
+| Size | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
+|---|---|---|---|
+| 5,120 px × 2,160 px | 2.370…:1 = 64∶27 = 4³:3³ | 5K Ultrawide | Ultrawide Screen |
+
+Finally, there are four more "honourable mention" 4K-ish sizes with heights of 2,160 px (just because I like the idea of 4:3, followed by 4²:3², followed by 4³:3³, etc ...):
+
+| Size | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
+|---|---|---|---|
+| 2,880 px × 2,160 px | 1.333…:1 = 4:3 |  | Full Screen |
+| 3,240 px × 2,160 px | 1.5:1 = 3:2 |  | 35 mm Film |
+| 3,456 px × 2,160 px | 1.6:1 = 16:10 |  |  |
+| ~3,495 px × 2,160 px | 1.618…:1 |  | Golden Ratio |
+
+These seven 4K-ish sizes equate to:
+
+| Size (at 300 px/inch) | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
+|---|---|---|---|
+|  9.6    inches × 7.2 inches | 1.333…:1 = 4:3 |  | Full Screen |
+| 10.8    inches × 7.2 inches | 1.5:1 = 3:2 |  | 35 mm Film |
+| 11.52   inches × 7.2 inches | 1.6:1 = 16:10 |  |  |
+| 11.650… inches × 7.2 inches | 1.618…:1 |  | Golden Ratio |
+| 12.8    inches × 7.2 inches | 1.778…:1 = 16:9 = 4²:3² | 4K UHD | Wide Screen |
+| 13.653… inches × 7.2 inches | 1.896…:1 | 4K DCI |  |
+| 17.066… inches × 7.2 inches | 2.370…:1 = 64∶27 = 4³:3³ | 5K Ultrawide | Ultrawide Screen |
+
+Given the recurring decimals in two of the seven 4K-ish sizes above, then I choose my personal 4K-ish MatPlotLib sizes (up to 4³:3³) to be:
+
+| Size (at 300 px/inch) | Size | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
+|---|---|---|---|---|
+|  0.8 inches × 7.2 inches |   240 px × 2,160 px | 0.111…:1 |  |  |
+|  1.6 inches × 7.2 inches |   480 px × 2,160 px | 0.222…:1 |  |  |
+|  2.4 inches × 7.2 inches |   720 px × 2,160 px | 0.333…:1 |  |  |
+|  3.2 inches × 7.2 inches |   960 px × 2,160 px | 0.444…:1 |  |  |
+|  4.0 inches × 7.2 inches | 1,200 px × 2,160 px | 0.556…:1 |  |  |
+|  4.8 inches × 7.2 inches | 1,440 px × 2,160 px | 0.667…:1 |  |  |
+|  5.6 inches × 7.2 inches | 1,680 px × 2,160 px | 0.778…:1 |  |  |
+|  6.4 inches × 7.2 inches | 1,920 px × 2,160 px | 0.889…:1 |  |  |
+|  7.2 inches × 7.2 inches | 2,160 px × 2,160 px | 1:1 |  | Square |
+|  8.0 inches × 7.2 inches | 2,400 px × 2,160 px | 1.111…:1 |  |  |
+|  8.8 inches × 7.2 inches | 2,640 px × 2,160 px | 1.222…:1 |  |  |
+|  9.6 inches × 7.2 inches | 2,880 px × 2,160 px | 1.333…:1 = 4:3 |  | Full Screen |
+| 10.4 inches × 7.2 inches | 3,120 px × 2,160 px | 1.444…:1 |  |  |
+| 11.2 inches × 7.2 inches | 3,360 px × 2,160 px | 1.556…:1 |  |  |
+| 12.0 inches × 7.2 inches | 3,600 px × 2,160 px | 1.667…:1 |  |  |
+| 12.8 inches × 7.2 inches | 3,840 px × 2,160 px | 1.778…:1 = 16:9 = 4²:3² | 4K UHD | Wide Screen |
+| 13.6 inches × 7.2 inches | 4,080 px × 2,160 px | 1.889…:1 |  |  |
+| 14.4 inches × 7.2 inches | 4,320 px × 2,160 px | 2:1 |  |  |
+| 15.2 inches × 7.2 inches | 4,560 px × 2,160 px | 2.111…:1 |  |  |
+| 16.0 inches × 7.2 inches | 4,800 px × 2,160 px | 2.222…:1 |  |  |
+| 16.8 inches × 7.2 inches | 5,040 px × 2,160 px | 2.333…:1 |  |  |
+| 17.6 inches × 7.2 inches | 5,280 px × 2,160 px | 2.444…:1 |  |  |
+
+You may notice that the heights are spaced 0.8 inches apart. In summary for:
+
+* a normal plot, including plots of a Robinson map with a horizontal colour bar, `figsize = (9.6, 7.2)` should be used; and
+* a naked Robinson map `figsize = (12.8, 7.2)` should be used.
+
+See the following Wikipedia articles:
+
+* [4K Size](https://en.wikipedia.org/wiki/4K_size)
+* [Aspect Ratio](https://en.wikipedia.org/wiki/Aspect_ratio_(image))
+* [Video Standards](https://commons.wikimedia.org/wiki/File:Vector_Video_Standards8.svg)
