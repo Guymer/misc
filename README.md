@@ -78,7 +78,7 @@ These seven 4K-ish sizes equate to:
 | 13.653… inches × 7.2 inches | 1.896…:1 | 4K DCI |  |
 | 17.066… inches × 7.2 inches | 2.370…:1 = 64∶27 = 4³:3³ | 5K Ultrawide | Ultrawide Screen |
 
-Given the recurring decimals in two of the seven 4K-ish sizes above, then I choose my personal 4K-ish MatPlotLib sizes (up to 4³:3³) to be:
+Given the recurring decimals in three of the seven 4K-ish sizes above, then I choose my personal 4K-ish MatPlotLib sizes (up to 4³:3³) to be:
 
 | Size (at 300 px/inch) | Size | Aspect Ratio | Size Nickname | Aspect Ratio Nickname |
 |---|---|---|---|---|
@@ -105,13 +105,13 @@ Given the recurring decimals in two of the seven 4K-ish sizes above, then I choo
 | 16.8 inches × 7.2 inches | 5,040 px × 2,160 px | 2.333…:1 |  |  |
 | 17.6 inches × 7.2 inches | 5,280 px × 2,160 px | 2.444…:1 |  |  |
 
-You may notice that the heights are spaced 0.8 inches apart. In summary for:
+You may notice that the heights are spaced 0.8 inches apart. In summary:
 
-* a normal plot, including plots of a Robinson map with a horizontal colour bar, `figsize = (9.6, 7.2)` should be used; and
-* a naked Robinson map `figsize = (12.8, 7.2)` should be used.
+* a normal plot, including plots of a Robinson map with a horizontal colour bar, should use `figsize = (9.6, 7.2)`; and
+* a naked Robinson map, or two axes side-by-side, should use `figsize = (12.8, 7.2)`.
 
 See the following Wikipedia articles:
 
-* [4K Size](https://en.wikipedia.org/wiki/4K_size)
+* [4K Resolution](https://en.wikipedia.org/wiki/4K_resolution)
 * [Aspect Ratio](https://en.wikipedia.org/wiki/Aspect_ratio_(image))
 * [Video Standards](https://commons.wikimedia.org/wiki/File:Vector_Video_Standards8.svg)
