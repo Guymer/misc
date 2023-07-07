@@ -104,6 +104,7 @@ Given the recurring decimals in three of the seven 4K-ish sizes above, then I ch
 | 16.0 inches × 7.2 inches | 4,800 px × 2,160 px | 2.222…:1 |  |  |
 | 16.8 inches × 7.2 inches | 5,040 px × 2,160 px | 2.333…:1 |  |  |
 | 17.6 inches × 7.2 inches | 5,280 px × 2,160 px | 2.444…:1 |  |  |
+| 18.4 inches × 7.2 inches | 5,520 px × 2,160 px | 2.555…:1 |  |  |
 
 You may notice that the heights are spaced 0.8 inches apart. In summary:
 
