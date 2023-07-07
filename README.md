@@ -108,8 +108,8 @@ Given the recurring decimals in three of the seven 4K-ish sizes above, then I ch
 
 You may notice that the heights are spaced 0.8 inches apart. In summary:
 
-* a normal plot, including plots of a Robinson map with a horizontal colour bar, should use `figsize = (9.6, 7.2)`; and
-* a naked Robinson map, or two axes side-by-side, should use `figsize = (12.8, 7.2)`.
+* normal plots, and plots of a Robinson map with a horizontal colour bar and plots of an Orthographic map with a vertical colour bar, should use `figsize = (9.6, 7.2)`; and
+* plots of a naked Robinson map, or plots of two axes side-by-side, should use `figsize = (12.8, 7.2)`.
 
 See the following Wikipedia articles:
 
