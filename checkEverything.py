@@ -91,17 +91,19 @@ def checkRun(nodeIn, fnameIn, /):
     if nodeIn.func.value.id != "subprocess":
         return
 
-    # Skip this node if it sets the run timeout ...
-    skip = False
-    for keyword in nodeIn.keywords:
-        if keyword.arg == "timeout":
-            skip = True
-            break
-    if skip:
-        return
+    # Loop over keyword arguments ...
+    for kwArg in ["check", "encoding", "timeout"]:
+        # Skip this node if it sets the run keyword argument ...
+        skip = False
+        for keyword in nodeIn.keywords:
+            if keyword.arg == kwArg:
+                skip = True
+                break
+        if skip:
+            continue
 
-    # Print ...
-    print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the timeout.")
+        # Print ...
+        print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the {kwArg}.")
 
 # Use the proper idiom in the main module ...
 # NOTE: See https://docs.python.org/3.11/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
