@@ -72,6 +72,37 @@ def checkLegend(nodeIn, fnameIn, /):
     # Print ...
     print(f"\"{fnameIn}\" adds a legend to \"{nodeIn.func.value.id}\" without specifying the location.")
 
+# Define function ...
+def checkRun(nodeIn, fnameIn, /):
+    """
+    Check that all "subprocess.run()" calls specify the timeout.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):
+        return
+    if not isinstance(nodeIn.func, ast.Attribute):
+        return
+
+    # Skip this node if it is not a "subprocess.run()" call ...
+    if nodeIn.func.attr != "run":
+        return
+    if nodeIn.func.value.id != "subprocess":
+        return
+
+    # Skip this node if it sets the run timeout ...
+    skip = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "timeout":
+            skip = True
+            break
+    if skip:
+        return
+
+    # Print ...
+    print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the timeout.")
+
 # Use the proper idiom in the main module ...
 # NOTE: See https://docs.python.org/3.11/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
@@ -90,7 +121,7 @@ if __name__ == "__main__":
     # Create argument parser and parse the arguments ...
     parser = argparse.ArgumentParser(
            allow_abbrev = False,
-            description = "Check command line arguments in Python scripts.",
+            description = "Check Python scripts.",
         formatter_class = argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
@@ -133,3 +164,4 @@ if __name__ == "__main__":
                 # Check everything ...
                 checkAddArgument(node, fname)
                 checkLegend(node, fname)
+                checkRun(node, fname)
