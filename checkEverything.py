@@ -73,6 +73,39 @@ def checkLegend(nodeIn, fnameIn, /):
     print(f"\"{fnameIn}\" adds a legend to \"{nodeIn.func.value.id}\" without specifying the location.")
 
 # Define function ...
+def checkPost(nodeIn, fnameIn, /):
+    """
+    Check that all "requests.post()" calls specify the timeout.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):
+        return
+    if not isinstance(nodeIn.func, ast.Attribute):
+        return
+
+    # Skip this node if it is not a "requests.post()" call ...
+    if nodeIn.func.attr != "post":
+        return
+    if nodeIn.func.value.id != "requests":
+        return
+
+    # Loop over keyword arguments ...
+    for kwArg in ["timeout"]:
+        # Skip this node if it sets the run keyword argument ...
+        skip = False
+        for keyword in nodeIn.keywords:
+            if keyword.arg == kwArg:
+                skip = True
+                break
+        if skip:
+            continue
+
+        # Print ...
+        print(f"\"{fnameIn}\" uses \"requests.post()\" without specifying the {kwArg}.")
+
+# Define function ...
 def checkRun(nodeIn, fnameIn, /):
     """
     Check that all "subprocess.run()" calls specify the timeout.
@@ -166,4 +199,5 @@ if __name__ == "__main__":
                 # Check everything ...
                 checkAddArgument(node, fname)
                 checkLegend(node, fname)
+                checkPost(node, fname)
                 checkRun(node, fname)
