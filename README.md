@@ -89,7 +89,7 @@ Given the recurring decimals in three of the seven 4K-ish sizes above, then I ch
 |  2.4 inches × 7.2 inches |   720 px × 2,160 px | 0.333…:1 |  |  |
 |  3.2 inches × 7.2 inches |   960 px × 2,160 px | 0.444…:1 |  |  |
 |  4.0 inches × 7.2 inches | 1,200 px × 2,160 px | 0.556…:1 |  |  |
-|  4.8 inches × 7.2 inches | 1,440 px × 2,160 px | 0.667…:1 |  |  |
+|  4.8 inches × 7.2 inches | 1,440 px × 2,160 px | 0.667…:1 = 2:3 |  | 35 mm Film (portrait) |
 |  5.6 inches × 7.2 inches | 1,680 px × 2,160 px | 0.778…:1 |  |  |
 |  6.4 inches × 7.2 inches | 1,920 px × 2,160 px | 0.889…:1 |  |  |
 |  7.2 inches × 7.2 inches | 2,160 px × 2,160 px | 1:1 |  | Square |
