@@ -14,3 +14,6 @@ __pycache__
 # Hide output of PyLint/ShellCheck ...
 pylint.log
 shellcheck.log
+
+# Hide data ...
+nubase2020/nubase_4.mas20.txt
