@@ -42,6 +42,7 @@ This repository contains a few random little things that do not fit in anywhere 
 This collection requires the following Python modules to be installed and available in your `PYTHONPATH`.
 
 * [pyguymer3](https://github.com/Guymer/PyGuymer3)
+* [scipy](https://pypi.org/project/scipy/)
 * [shapely](https://pypi.org/project/Shapely/)
 
 ## MatPlotLib Figure Sizes

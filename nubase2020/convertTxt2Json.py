@@ -8,6 +8,13 @@ if __name__ == "__main__":
     import os
     import string
 
+    # Import special modules ...
+    try:
+        import scipy
+        import scipy.constants
+    except:
+        raise Exception("\"scipy\" is not installed; run \"pip install --user scipy\"") from None
+
     # Import my modules ...
     try:
         import pyguymer3
@@ -172,7 +179,9 @@ if __name__ == "__main__":
             # Populate physical nuclide ...
             if rawNuc["Mass"].endswith("#"):
                 rawNuc["Mass"] = f'{rawNuc["Mass"].removesuffix("#")}.0'
-            simple["physicalNuclides"][nucKey] = float(rawNuc["Mass"])          # [keV]
+            mass = 1000.0 * float(rawNuc["Mass"])                               # [eV]
+            mass /= scipy.constants.value("atomic mass unit-electron volt relationship")    # [amu]
+            simple["physicalNuclides"][nucKey] = float(rawNuc["A"]) + mass      # [amu]
 
         # Save raw nuclides database ...
         with open("simple.json", "wt", encoding = "utf-8") as fObj:
