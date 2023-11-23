@@ -36,6 +36,7 @@ export TMPDIR="/tmp"
 
 # Set variables ...
 # NOTE: https://superuser.com/a/1277375
+export CRYPTOGRAPHY_OPENSSL_NO_LEGACY="1"
 export LANG="en_GB.UTF-8"
 export NCURSES_NO_UTF8_ACS="1"
 export PINENTRY_USER_DATA="USE_CURSES=1"
