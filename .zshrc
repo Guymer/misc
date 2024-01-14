@@ -22,9 +22,10 @@ path+=/usr/local/sbin
 path+=/usr/local/bin
 path+=/usr/local/mpi/openmpi/bin
 path+=/opt/local/bin
-path+=$HOME/bin
-path+=$HOME/gocode/bin
-path+=$HOME/Library/Python/3.9/bin
+path+=${HOME}/bin
+path+=${HOME}/gocode/bin
+path+=${HOME}/Library/Python/3.11/bin
+path+=${HOME}/.local/bin
 
 # Set paths ...
 export BASH_ENV="$HOME/.bashrc"

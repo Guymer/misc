@@ -15,7 +15,7 @@ export BASH_ENV="$HOME/.bashrc"
 export CARTOPY_USER_BACKGROUNDS="/path/to/NaturalEarthBackgroundImages"
 export GEM_HOME="$HOME/.gem"
 export GOPATH="$HOME/gocode"
-export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi/bin:/opt/local/bin:$HOME/bin:$HOME/gocode/bin:$HOME/Library/Python/3.9/bin"
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/local/mpi/openmpi/bin:/opt/local/bin:${HOME}/bin:${HOME}/gocode/bin:${HOME}/Library/Python/3.11/bin:${HOME}/.local/bin"
 export PYTHONPATH="/path/to/Repositories:/path/to/modules"
 export TMPDIR="/tmp"
 
