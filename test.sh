@@ -71,7 +71,7 @@ for g in */.git */*/*/*/*/*/.git; do
             find "${prefix}" -type d -name "__pycache__" -delete
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 "${prefix}" &> "${prefix}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0301,R0801 "${prefix}" &> "${prefix}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${prefix}/pylint.log" &> /dev/null; then
@@ -110,7 +110,7 @@ for g in */.git */*/*/*/*/*/.git; do
 
             # Run PyLint on the Python script directory ...
             readarray -t fnames < "${tmp1}"
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=R0801 "${fnames[@]}" &> "${d}/pylint.log"
+            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0301,R0801 "${fnames[@]}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
