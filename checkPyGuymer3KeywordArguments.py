@@ -87,6 +87,9 @@ if __name__ == "__main__":
 
     # **************************************************************************
 
+    # Initialize log ...
+    log = []
+
     # Loop over files in folder ...
     for fname in pyguymer3.return_file_list(args.dname):
         # Skip files which are not Python scripts ...
@@ -153,6 +156,7 @@ if __name__ == "__main__":
                         if flag:
                             continue
                         print(f"    \"{keyword}\" isn't specified.")
+                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Handle PyGuymer3 calls ...
@@ -166,6 +170,7 @@ if __name__ == "__main__":
                         if flag:
                             continue
                         print(f"    \"{keyword}\" isn't specified.")
+                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Handle PyGuymer3 names ...
@@ -179,9 +184,14 @@ if __name__ == "__main__":
                         if flag:
                             continue
                         print(f"    \"{keyword}\" isn't specified.")
+                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Catch unexpected types ...
                 print(f"WARNING: Unable to ascertain the keywords specified as \"node.func.value\" is a \"{type(node.func.value)}\".")
                 if args.debug:
                     print(ast.dump(node, indent = 4))
+
+    # Print log ...
+    print(80 * "*")
+    print("\n".join(log))
