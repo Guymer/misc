@@ -8,9 +8,9 @@ def checkAddArgument(nodeIn, fnameIn, /):
 
     # Skip this node if it is not a function call (or if it is not an attribute
     # call) ...
-    if not isinstance(nodeIn, ast.Call):
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
         return
-    if not isinstance(nodeIn.func, ast.Attribute):
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
         return
 
     # Skip this node if it is not a "parser.add_argument()" call ...
@@ -49,9 +49,9 @@ def checkLegend(nodeIn, fnameIn, /):
 
     # Skip this node if it is not a function call (or if it is not an attribute
     # call) ...
-    if not isinstance(nodeIn, ast.Call):
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
         return
-    if not isinstance(nodeIn.func, ast.Attribute):
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
         return
 
     # Skip this node if it is not a "ax.legend()" call ...
@@ -80,9 +80,9 @@ def checkPost(nodeIn, fnameIn, /):
 
     # Skip this node if it is not a function call (or if it is not an attribute
     # call) ...
-    if not isinstance(nodeIn, ast.Call):
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
         return
-    if not isinstance(nodeIn.func, ast.Attribute):
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
         return
 
     # Skip this node if it is not a "requests.post()" call ...
@@ -113,9 +113,9 @@ def checkRun(nodeIn, fnameIn, /):
 
     # Skip this node if it is not a function call (or if it is not an attribute
     # call) ...
-    if not isinstance(nodeIn, ast.Call):
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
         return
-    if not isinstance(nodeIn.func, ast.Attribute):
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
         return
 
     # Skip this node if it is not a "subprocess.run()" call ...
