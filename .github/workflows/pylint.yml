@@ -22,6 +22,7 @@ jobs:
                 with:
                     path: pyguymer3
                     repository: Guymer/PyGuymer3
+                    submodules: true
             -
                 name: Set up Python ${{ matrix.python-version }}
                 uses: actions/setup-python@v5                                   # https://github.com/actions/setup-python
@@ -33,6 +34,7 @@ jobs:
                     python -m pip install --upgrade pip
                     pip install -r main/requirements.txt
                     pip install -r pyguymer3/requirements.txt
+                    pip install -r pyguymer3/pyguymer3/f90/fortranlib/requirements.txt
                     pip install pylint
             -
                 name: List programs
