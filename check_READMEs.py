@@ -25,6 +25,12 @@ if __name__ == "__main__":
     standardModules.append("funcs")
     standardModules.append("web_mod")
 
+    # Define a list of modules which are not published on Pip ...
+    unpublishedModules = [
+        "pyguymer3",
+        "sphinx_fortran",
+    ]
+
     # Loop over READMEs ...
     for rname in sorted(glob.glob("*/README.md")):
         print(f"Checking \"{rname}\" ...")
@@ -96,6 +102,9 @@ if __name__ == "__main__":
         if "sphinx_rtd_theme" in modules:
             if "sphinx" not in modules:
                 modules.append("sphinx")
+        if "sphinx" in modules:
+            if "sphinx_fortran" not in modules:
+                modules.append("sphinx_fortran")
 
         # **********************************************************************
 
@@ -108,6 +117,8 @@ if __name__ == "__main__":
 
             # Write imported non-standard modules ...
             for module in sorted(modules):
+                if module in unpublishedModules:
+                    continue
                 fObj.write(f"{module}\n")
 
         # **********************************************************************
