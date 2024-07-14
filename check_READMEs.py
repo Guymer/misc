@@ -16,20 +16,27 @@ if __name__ == "__main__":
 
     # **************************************************************************
 
-    # Load list of standard modules ...
+    # Load list of standard Python modules ...
     with open(f"{os.path.dirname(os.path.realpath(__file__, strict = True))}/Python 3.11 Standard Modules.json", "rt", encoding = "utf-8") as fObj:
         standardModules = json.load(fObj)
 
-    # Append common non-standard modules that I do not want to be warned about ...
+    # Append common non-standard Python modules that I do not want to be warned
+    # about ...
     standardModules.append("f90")
     standardModules.append("funcs")
     standardModules.append("web_mod")
 
-    # Define a list of modules which are not published on Pip ...
+    # Define a list of Python modules which are not published on Pip ...
     unpublishedModules = [
         "pyguymer3",
         "sphinx_fortran",
     ]
+
+    # Define a dictionary mapping Python module import names to Pip package
+    # installation names ...
+    python2pip = {
+        "PIL" : "pillow",
+    }
 
     # Loop over READMEs ...
     for rname in sorted(glob.glob("*/README.md")):
@@ -119,7 +126,7 @@ if __name__ == "__main__":
             for module in sorted(modules):
                 if module in unpublishedModules:
                     continue
-                fObj.write(f"{module}\n")
+                fObj.write(f"{python2pip.get(module, module)}\n")
 
         # **********************************************************************
 
