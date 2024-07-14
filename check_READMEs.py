@@ -35,7 +35,8 @@ if __name__ == "__main__":
     # Define a dictionary mapping Python module import names to Pip package
     # installation names ...
     python2pip = {
-        "PIL" : "pillow",
+              "PIL" : "pillow",
+        "shapefile" : "pyshp",
     }
 
     # Loop over READMEs ...
