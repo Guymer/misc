@@ -114,6 +114,12 @@ if __name__ == "__main__":
             if "sphinx_fortran" not in modules:
                 modules.append("sphinx_fortran")
 
+        # It is unclear if NumPy always pulls in Meson to allow f2py builds, so
+        # manually add it just in case ...
+        if "numpy" in modules:
+            if "meson" not in modules:
+                modules.append("meson")
+
         # **********************************************************************
 
         # Open Pip requirements file for writing ...
@@ -137,6 +143,8 @@ if __name__ == "__main__":
 
         # Loop over imported non-standard modules ...
         for module in sorted(modules):
+            if module == "meson":
+                continue
             linked = False
             for line in lines:
                 if line.strip().startswith(f"* [{module}]("):
