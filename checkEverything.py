@@ -139,7 +139,7 @@ def checkRun(nodeIn, fnameIn, /):
         print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the {kwArg}.")
 
 # Use the proper idiom in the main module ...
-# NOTE: See https://docs.python.org/3.11/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
+# NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
     # Import standard modules ...
     import argparse
