@@ -114,11 +114,13 @@ if __name__ == "__main__":
             if "sphinx_fortran" not in modules:
                 modules.append("sphinx_fortran")
 
-        # It is unclear if NumPy always pulls in Meson to allow f2py builds, so
-        # manually add it just in case ...
+        # It is unclear if NumPy always pulls in Meson/Ninja to allow f2py
+        # builds, so manually add them just in case ...
         if "numpy" in modules:
             if "meson" not in modules:
                 modules.append("meson")
+            if "ninja" not in modules:
+                modules.append("ninja")
 
         # **********************************************************************
 
@@ -133,7 +135,14 @@ if __name__ == "__main__":
             for module in sorted(modules):
                 if module in unpublishedModules:
                     continue
-                fObj.write(f"{python2pip.get(module, module)}\n")
+                if module in [
+                    "meson",
+                    "ninja",
+                ]:
+                    fObj.write(f"{python2pip.get(module, module)} # Required so that NumPy can use an up-to-date version (not the old\n")
+                    fObj.write("      # version that came with your system) when running \"f2py\".\n")
+                else:
+                    fObj.write(f"{python2pip.get(module, module)}\n")
 
         # **********************************************************************
 
@@ -143,7 +152,10 @@ if __name__ == "__main__":
 
         # Loop over imported non-standard modules ...
         for module in sorted(modules):
-            if module == "meson":
+            if module in [
+                "meson",
+                "ninja",
+            ]:
                 continue
             linked = False
             for line in lines:
