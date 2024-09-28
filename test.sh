@@ -16,8 +16,8 @@ fi
 #         * R0801 - Similar lines in %s files
 
 # Define binaries and check that they exist ...
-pylint="/opt/local/bin/pylint-3.11"
-python="/opt/local/bin/python3.11"
+pylint="/opt/local/bin/pylint-3.12"
+python="/opt/local/bin/python3.12"
 shellcheck="/opt/local/bin/shellcheck"
 if ! type "${pylint}" &> /dev/null; then
     echo "WARNING: the binary defined in \$pylint does not exist (Python checks will be skipped)"

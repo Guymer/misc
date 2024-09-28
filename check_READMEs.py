@@ -17,7 +17,7 @@ if __name__ == "__main__":
     # **************************************************************************
 
     # Load list of standard Python modules ...
-    with open(f"{os.path.dirname(os.path.realpath(__file__, strict = True))}/Python 3.11 Standard Modules.json", "rt", encoding = "utf-8") as fObj:
+    with open(f"{os.path.dirname(os.path.realpath(__file__, strict = True))}/Python 3.12 Standard Modules.json", "rt", encoding = "utf-8") as fObj:
         standardModules = json.load(fObj)
 
     # Append common non-standard Python modules that I do not want to be warned

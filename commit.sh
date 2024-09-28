@@ -22,7 +22,7 @@ for d in */.git; do
     cd "$(dirname "${d}")" || exit 1
 
     # Commit everything ...
-    git commit -a
+    git commit -a -m "increment (Mac OS X) Python version to 3.12"
 
     # Change directory ...
     cd "${HOME}/Repositories" || exit 1
