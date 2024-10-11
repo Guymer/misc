@@ -42,11 +42,13 @@ if __name__ == "__main__":
         default = [
             "chunksize",
             "cookies",
+            "eps",
             "exiftoolPath",
             "gifsiclePath",
             "headers",
             "jpegtranPath",
             "mp4filePath",
+            "nIter",
             "optipngPath",
             "progressive",
         ],
