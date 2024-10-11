@@ -42,7 +42,13 @@ if __name__ == "__main__":
         default = [
             "chunksize",
             "cookies",
+            "exiftoolPath",
+            "gifsiclePath",
             "headers",
+            "jpegtranPath",
+            "mp4filePath",
+            "optipngPath",
+            "progressive",
         ],
            dest = "unImpKwArgs",
            help = "the \"un-important\" keyword-only arguments to not check for if \"--lite\"",
