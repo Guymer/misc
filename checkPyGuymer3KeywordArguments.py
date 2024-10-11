@@ -32,6 +32,23 @@ if __name__ == "__main__":
         action = "store_true",
           help = "print debug messages",
     )
+    parser.add_argument(
+        "--lite",
+        action = "store_true",
+          help = "don't check for \"un-important\" keyword-only arguments (see \"--un-important-keyword-arguments\")",
+    )
+    parser.add_argument(
+        "--un-important-keyword-arguments",
+        default = [
+            "chunksize",
+            "cookies",
+            "headers",
+        ],
+           dest = "unImpKwArgs",
+           help = "the \"un-important\" keyword-only arguments to not check for if \"--lite\"",
+          nargs = "+",
+           type = str,
+    )
     args = parser.parse_args()
 
     # **************************************************************************
@@ -155,8 +172,9 @@ if __name__ == "__main__":
                     for keyword, flag in flags.items():
                         if flag:
                             continue
-                        print(f"    \"{keyword}\" isn't specified.")
-                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
+                        if not args.lite or keyword not in args.unImpKwArgs:
+                            print(f"    \"{keyword}\" isn't specified.")
+                            log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Handle PyGuymer3 calls ...
@@ -169,8 +187,9 @@ if __name__ == "__main__":
                     for keyword, flag in flags.items():
                         if flag:
                             continue
-                        print(f"    \"{keyword}\" isn't specified.")
-                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
+                        if not args.lite or keyword not in args.unImpKwArgs:
+                            print(f"    \"{keyword}\" isn't specified.")
+                            log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Handle PyGuymer3 names ...
@@ -183,8 +202,9 @@ if __name__ == "__main__":
                     for keyword, flag in flags.items():
                         if flag:
                             continue
-                        print(f"    \"{keyword}\" isn't specified.")
-                        log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
+                        if not args.lite or keyword not in args.unImpKwArgs:
+                            print(f"    \"{keyword}\" isn't specified.")
+                            log.append(f"LOG: {fname} » {srcGuess} » \"{keyword}\" isn't specified")
                     continue
 
                 # Catch unexpected types ...
