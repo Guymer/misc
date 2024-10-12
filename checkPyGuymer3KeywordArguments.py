@@ -40,6 +40,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--un-important-keyword-arguments",
         default = [
+            "atomicParsleyPath",
             "chunksize",
             "cookies",
             "eps",
@@ -51,12 +52,15 @@ if __name__ == "__main__":
             "lsdvdPath",
             "metaflacPath",
             "mp4filePath",
+            "mp4tagsPath",
+            "mplayerPath",
             "nIter",
             "optipngPath",
             "pkgPath",
             "portPath",
             "progressive",
             "ramLimit",
+            "tarPath",
             "xzPath",
             "zypperPath",
         ],
