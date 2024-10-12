@@ -45,12 +45,20 @@ if __name__ == "__main__":
             "eps",
             "exiftoolPath",
             "gifsiclePath",
+            "gitPath",
             "headers",
             "jpegtranPath",
+            "lsdvdPath",
+            "metaflacPath",
             "mp4filePath",
             "nIter",
             "optipngPath",
+            "pkgPath",
+            "portPath",
             "progressive",
+            "ramLimit",
+            "xzPath",
+            "zypperPath",
         ],
            dest = "unImpKwArgs",
            help = "the \"un-important\" keyword-only arguments to not check for if \"--lite\"",
@@ -179,6 +187,8 @@ if __name__ == "__main__":
                         raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
+                            if args.lite and keyword in args.unImpKwArgs:
+                                log.append(f"ERROR: {fname} » {srcGuess} » \"{keyword}\" is specified but it shouldn't be")
                             continue
                         if not args.lite or keyword not in args.unImpKwArgs:
                             print(f"    \"{keyword}\" isn't specified.")
@@ -194,6 +204,8 @@ if __name__ == "__main__":
                         raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
+                            if args.lite and keyword in args.unImpKwArgs:
+                                log.append(f"ERROR: {fname} » {srcGuess} » \"{keyword}\" is specified but it shouldn't be")
                             continue
                         if not args.lite or keyword not in args.unImpKwArgs:
                             print(f"    \"{keyword}\" isn't specified.")
@@ -209,6 +221,8 @@ if __name__ == "__main__":
                         raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
+                            if args.lite and keyword in args.unImpKwArgs:
+                                log.append(f"ERROR: {fname} » {srcGuess} » \"{keyword}\" is specified but it shouldn't be")
                             continue
                         if not args.lite or keyword not in args.unImpKwArgs:
                             print(f"    \"{keyword}\" isn't specified.")
