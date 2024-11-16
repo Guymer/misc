@@ -42,6 +42,8 @@ if __name__ == "__main__":
         # Skip Python scripts which are known Git submodules ...
         if "/openflights/" in fname:
             continue
+        if "/ourairports-data/" in fname:
+            continue
         if "/stations/" in fname:
             continue
         if "/validator/" in fname:
