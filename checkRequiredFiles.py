@@ -38,7 +38,6 @@ if __name__ == "__main__":
             ".gitignore",
             ".pylintrc",
             ".shellcheckrc",
-            ".vscode/settings.json",
             "LICENCE.txt",
             "README.md",
             "requirements.txt",
