@@ -22,7 +22,7 @@ for d in */.git; do
     cd "$(dirname "${d}")" || exit 1
 
     # Print the branches ...
-    git branch
+    git branch --all
 
     # Change directory ...
     cd "${HOME}/Repositories" || exit 1
