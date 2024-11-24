@@ -23,6 +23,7 @@ for d in */.git; do
 
     # Update everything ...
     git remote update
+    git remote prune origin
 
     # Change directory ...
     cd "${HOME}/Repositories" || exit 1

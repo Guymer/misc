@@ -24,6 +24,7 @@ for d in */.git; do
     # Pull everything ...
     git pull --ff-only --recurse-submodules=yes
     git submodule init
+    git remote prune origin
 
     # Change directory ...
     cd "${HOME}/Repositories" || exit 1

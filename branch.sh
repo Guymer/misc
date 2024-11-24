@@ -22,6 +22,7 @@ for d in */.git; do
     cd "$(dirname "${d}")" || exit 1
 
     # Print the branches ...
+    git remote prune origin
     git branch --all
 
     # Change directory ...
