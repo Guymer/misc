@@ -52,6 +52,7 @@ if __name__ == "__main__":
             "cookies",
             "eps",
             "exiftoolPath",
+            "extent",
             "gifsiclePath",
             "gitPath",
             "gridlines_int",
@@ -67,11 +68,14 @@ if __name__ == "__main__":
             "mp4filePath",
             "mp4tagsPath",
             "mplayerPath",
+            "name",
             "optipngPath",
             "pkgPath",
+            "pool",
             "portPath",
             "prefix",
             "ramLimit",
+            "strict",
             "tarPath",
             "tol",
             "xzPath",
@@ -97,6 +101,8 @@ if __name__ == "__main__":
 
         # Skip Python scripts which are known Git submodules ...
         if "/openflights/" in fname:
+            continue
+        if "/ourairports-data/" in fname:
             continue
         if "/stations/" in fname:
             continue
