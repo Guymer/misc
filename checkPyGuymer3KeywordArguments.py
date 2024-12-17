@@ -80,6 +80,12 @@ if __name__ == "__main__":
             "tol",
             "xzPath",
             "zypperPath",
+
+            "gs",                       # A MatPlotLib subplot arrangement.
+
+            "nrows",                    # A MatPlotLib subplot arrangement.
+            "ncols",                    # A MatPlotLib subplot arrangement.
+            "index",                    # A MatPlotLib subplot arrangement.
         ],
            dest = "unImpKwArgs",
            help = "the \"un-important\" keyword-only arguments to not check for if \"--lite\"",
