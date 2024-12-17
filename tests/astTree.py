@@ -45,7 +45,9 @@ if __name__ == "__main__":
             [1.0, 1.0]
         ),
         1000.0,
-        ramLimit = round(pyguymer3.now().timestamp()),
+        ramLimit = round(pyguymer3.now().timestamp()),                          # Setting the RAM limit to be a UNIX timestamp is very
+                                                                                # silly, but it allows me to test how to access "pyguymer3"
+                                                                                # calls as keyword arguments to functions using "ast".
     )
     print(e)
 
@@ -55,6 +57,8 @@ if __name__ == "__main__":
             [2.0, 2.0]
         ),
         2000.0,
-        ramLimit = round(pyguymer3.now().timestamp()),
+        ramLimit = round(pyguymer3.now().timestamp()),                          # Setting the RAM limit to be a UNIX timestamp is very
+                                                                                # silly, but it allows me to test how to access "pyguymer3"
+                                                                                # calls as keyword arguments to functions using "ast".
     ).buffer(2.0)
     print(f)
