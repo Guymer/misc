@@ -31,7 +31,13 @@ if __name__ == "__main__":
         with pyguymer3.start_session() as sess:
             # Download dataset ...
             # NOTE: See https://www.anl.gov/phy/atomic-mass-data-resources
-            pyguymer3.download_file(sess, "https://www.anl.gov/sites/www/files/2022-11/nubase_4.mas20.txt", "nubase_4.mas20.txt")
+            pyguymer3.download_file(
+                sess,
+                "https://www.anl.gov/sites/www/files/2022-11/nubase_4.mas20.txt",
+                "nubase_4.mas20.txt",
+                timeout = 60.0,
+                 verify = True,
+            )
 
     # **************************************************************************
 
