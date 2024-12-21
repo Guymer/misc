@@ -41,45 +41,59 @@ if __name__ == "__main__":
         "--un-important-keyword-arguments",
         default = [
             "atomicParsleyPath",
-            "chunksize",
-            "coastlines_edgecolor",
-            "coastlines_facecolor",
-            "coastlines_levels",
-            "coastlines_linestyle",
-            "coastlines_linewidth",
-            "coastlines_resolution",
-            "coastlines_zorder",
-            "cookies",
-            "eps",
             "exiftoolPath",
-            "extent",
             "gifsiclePath",
             "gitPath",
-            "gridlines_int",
-            "gridlines_linecolor",
-            "gridlines_linestyle",
-            "gridlines_linewidth",
-            "gridlines_zorder",
-            "headers",
-            "ignorableFiles",
             "jpegtranPath",
             "lsdvdPath",
             "metaflacPath",
             "mp4filePath",
             "mp4tagsPath",
             "mplayerPath",
-            "name",
             "optipngPath",
             "pkgPath",
-            "pool",
             "portPath",
-            "prefix",
-            "ramLimit",
-            "strict",
             "tarPath",
-            "tol",
             "xzPath",
             "zypperPath",
+
+            "angConv",                  # pyguymer3.geo.find_min_max_dist_bearing()
+            "background",               # Lots of functions.
+            "chunksize",                # Lots of functions.
+            "coastlines_edgecolor",     # pyguymer3.geo.add_axis()
+            "coastlines_facecolor",     # pyguymer3.geo.add_axis()
+            "coastlines_levels",        # pyguymer3.geo.add_axis()
+            "coastlines_linestyle",     # pyguymer3.geo.add_axis()
+            "coastlines_linewidth",     # pyguymer3.geo.add_axis()
+            "coastlines_resolution",    # pyguymer3.geo.add_axis()
+            "coastlines_zorder",        # pyguymer3.geo.add_axis()
+            "cookies",                  # Lots of functions.
+            "crf",                      # pyguymer3.media.images2mp4()
+            "eps",                      # Lots of functions.
+            "extent",                   # pyguymer3.geo.add_map_background()
+            "form",                     # pyguymer3.media.images2mp4()
+            "gridlines_int",            # pyguymer3.geo.add_axis()
+            "gridlines_linecolor",      # pyguymer3.geo.add_axis()
+            "gridlines_linestyle",      # pyguymer3.geo.add_axis()
+            "gridlines_linewidth",      # pyguymer3.geo.add_axis()
+            "gridlines_zorder",         # pyguymer3.geo.add_axis()
+            "headers",                  # Lots of functions.
+            "ignorableFiles",           # pyguymer3.remove_almost_empty_directories()
+            "level",                    # pyguymer3.media.images2mp4()
+            "lossless",                 # Lots of functions.
+            "method",                   # Lots of functions.
+            "minimize_size",            # Lots of functions.
+            "name",                     # pyguymer3.geo.add_map_background()
+            "physical",                 # pyguymer3.geo.add_NE_map_underlay()
+            "pool",                     # Lots of functions.
+            "prefix",                   # Lots of functions.
+            "progressive",              # Lots of functions.
+            "profile",                  # pyguymer3.media.images2mp4()
+            "quality",                  # Lots of functions.
+            "ramLimit",                 # Lots of functions.
+            "strict",                   # pyguymer3.geo.getRecordAttribute()
+            "tol",                      # Lots of functions.
+            "useSciPy",                 # pyguymer3.geo.find_middle_of_locs()
 
             "gs",                       # A MatPlotLib subplot arrangement.
 
