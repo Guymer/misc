@@ -164,6 +164,11 @@ if __name__ == "__main__":
         help = "the folder to check",
         type = str,
     )
+    parser.add_argument(
+        "--debug",
+        action = "store_true",
+          help = "print debug messages",
+    )
     args = parser.parse_args()
 
     # **************************************************************************
@@ -172,7 +177,13 @@ if __name__ == "__main__":
     funcs = {}
 
     # Loop over files in folder ...
-    for fname in pyguymer3.return_file_list(args.dname):
+    for fname in pyguymer3.return_file_list(
+        args.dname,
+            allowHidden = True,
+                  debug = args.debug,
+        follow_symlinks = False,
+        return_symlinks = False,
+    ):
         # Skip files which are not Python scripts ...
         if not fname.endswith(".py"):
             continue
