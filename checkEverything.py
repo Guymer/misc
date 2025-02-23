@@ -23,7 +23,7 @@ def checkAddArgument(nodeIn, fnameIn, /):
     skip = False
     for keyword in nodeIn.keywords:
         if keyword.arg == "action":
-            if keyword.value.value in ["store_false", "store_true"]:
+            if keyword.value.value in ["store_false", "store_true",]:
                 skip = True
                 break
     if skip:
@@ -92,8 +92,8 @@ def checkPost(nodeIn, fnameIn, /):
         return
 
     # Loop over keyword arguments ...
-    for kwArg in ["timeout"]:
-        # Skip this node if it sets the run keyword argument ...
+    for kwArg in ["timeout",]:
+        # Skip this node if it sets the "requests.post()" keyword argument ...
         skip = False
         for keyword in nodeIn.keywords:
             if keyword.arg == kwArg:
@@ -125,8 +125,8 @@ def checkRun(nodeIn, fnameIn, /):
         return
 
     # Loop over keyword arguments ...
-    for kwArg in ["check", "encoding", "timeout"]:
-        # Skip this node if it sets the run keyword argument ...
+    for kwArg in ["check", "encoding", "timeout",]:
+        # Skip this node if it sets the "subprocess.run()" keyword argument ...
         skip = False
         for keyword in nodeIn.keywords:
             if keyword.arg == kwArg:
@@ -137,6 +137,37 @@ def checkRun(nodeIn, fnameIn, /):
 
         # Print ...
         print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the {kwArg}.")
+
+# Define function ...
+def checkZip(nodeIn, fnameIn, /):
+    """
+    Check that all "zip()" calls specify the strictness.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
+        return
+    if not isinstance(nodeIn.func, ast.Name):                                   # pylint: disable=E0606
+        return
+
+    # Skip this node if it is not a "zip()" call ...
+    if nodeIn.func.id != "zip":
+        return
+
+    # Loop over keyword arguments ...
+    for kwArg in ["strict",]:
+        # Skip this node if it sets the "zip()" keyword argument ...
+        skip = False
+        for keyword in nodeIn.keywords:
+            if keyword.arg == kwArg:
+                skip = True
+                break
+        if skip:
+            continue
+
+        # Print ...
+        print(f"\"{fnameIn}\" uses \"zip()\" without specifying the {kwArg}.")
 
 # Use the proper idiom in the main module ...
 # NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
@@ -214,3 +245,4 @@ if __name__ == "__main__":
                 checkLegend(node, fname)
                 checkPost(node, fname)
                 checkRun(node, fname)
+                checkZip(node, fname)
