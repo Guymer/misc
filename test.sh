@@ -13,6 +13,7 @@ fi
 
 # NOTE: Currently, the following MyPy checks are hard-coded to be disabled (so
 #       that I can concentrate on fixing all the others first):
+#         * attr-defined
 #         * import-not-found
 #         * import-untyped
 
@@ -64,7 +65,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
-    # Print warning if there isn't a MyPy configuration file ...
+    # Check that we can run MyPy ...
     if ! type "${mypy}" &> /dev/null; then
         false
     elif ! type "${python}" &> /dev/null; then
@@ -72,14 +73,18 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
     else
         # Check if it is a Python module ...
         if [[ -f ${init} ]]; then
-            printf "%-120s : " "Testing \"${prefix}\" using MyPy (as a Python module)"
+            printf "%-133s : " "Testing \"${prefix}\" using MyPy (as a Python module)"
 
             # Clean the Python module ...
             find "${prefix}" -type f -name "*.pyc" -delete
             find "${prefix}" -type d -name "__pycache__" -delete
 
             # Run MyPy on the Python module ...
-            ${mypy} --disable-error-code import-not-found --disable-error-code import-untyped "${prefix}" &> "${prefix}/mypy.log"
+            ${mypy}                                                             \
+                --disable-error-code attr-defined                               \
+                --disable-error-code import-not-found                           \
+                --disable-error-code import-untyped                             \
+                "${prefix}" &> "${prefix}/mypy.log"
 
             # Check if it is perfect ...
             if grep -F "Success: no issues found" "${prefix}/mypy.log" &> /dev/null; then
@@ -92,7 +97,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
-    # Print warning if there isn't a MyPy configuration file ...
+    # Check that we can run MyPy ...
     if ! type "${mypy}" &> /dev/null; then
         false
     elif ! type "${python}" &> /dev/null; then
@@ -112,11 +117,15 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
         # Check that there are some Python scripts ...
         if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-            printf "%-120s : " "Testing \"${d}\" using MyPy (as a Python script directory)"
+            printf "%-133s : " "Testing \"${d}\" using MyPy (as a Python script directory)"
 
             # Run MyPy on the Python script directory ...
             readarray -t fnames < "${tmp1}"
-            ${mypy} --disable-error-code import-not-found --disable-error-code import-untyped "${fnames[@]}" &> "${d}/mypy.log"
+            ${mypy}                                                             \
+                --disable-error-code attr-defined                               \
+                --disable-error-code import-not-found                           \
+                --disable-error-code import-untyped                             \
+                "${fnames[@]}" &> "${d}/mypy.log"
 
             # Check if it is perfect ...
             if grep -F "Success: no issues found" "${d}/mypy.log" &> /dev/null; then
@@ -142,14 +151,17 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
     else
         # Check if it is a Python module ...
         if [[ -f ${init} ]]; then
-            printf "%-120s : " "Testing \"${prefix}\" using PyLint (as a Python module)"
+            printf "%-133s : " "Testing \"${prefix}\" using PyLint (as a Python module)"
 
             # Clean the Python module ...
             find "${prefix}" -type f -name "*.pyc" -delete
             find "${prefix}" -type d -name "__pycache__" -delete
 
             # Run PyLint on the Python module ...
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0301,R0801 "${prefix}" &> "${prefix}/pylint.log"
+            ${pylint}                                                           \
+                --rcfile="${d}/.pylintrc"                                       \
+                --disable=C0301,R0801                                           \
+                "${prefix}" &> "${prefix}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${prefix}/pylint.log" &> /dev/null; then
@@ -184,11 +196,14 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
         # Check that there are some Python scripts ...
         if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-            printf "%-120s : " "Testing \"${d}\" using PyLint (as a Python script directory)"
+            printf "%-133s : " "Testing \"${d}\" using PyLint (as a Python script directory)"
 
             # Run PyLint on the Python script directory ...
             readarray -t fnames < "${tmp1}"
-            ${pylint} --rcfile="${d}/.pylintrc" --disable=C0301,R0801 "${fnames[@]}" &> "${d}/pylint.log"
+            ${pylint}                                                           \
+                --rcfile="${d}/.pylintrc"                                       \
+                --disable=C0301,R0801                                           \
+                "${fnames[@]}" &> "${d}/pylint.log"
 
             # Check if it is perfect ...
             if grep -F "Your code has been rated at 10.00/10" "${d}/pylint.log" &> /dev/null; then
@@ -224,7 +239,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
         # Check that there are some Shell scripts ...
         if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-            printf "%-120s : " "Testing \"${d}\" (as a Shell script directory)"
+            printf "%-133s : " "Testing \"${d}\" (as a Shell script directory)"
 
             # Run ShellCheck on the Shell script directory ...
             ln -sf "${d}/.shellcheckrc" ".shellcheckrc"
