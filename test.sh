@@ -11,14 +11,24 @@ if ! type mktemp &> /dev/null; then
     exit 1
 fi
 
-# NOTE: Currently, the following PyLint check is hard-coded to be disabled (so
+# NOTE: Currently, the following MyPy checks are hard-coded to be disabled (so
 #       that I can concentrate on fixing all the others first):
+#         * import-not-found
+#         * import-untyped
+
+# NOTE: Currently, the following PyLint checks are hard-coded to be disabled (so
+#       that I can concentrate on fixing all the others first):
+#         * C0301 - Line too long
 #         * R0801 - Similar lines in %s files
 
 # Define binaries and check that they exist ...
+mypy="/opt/local/bin/mypy-3.12"
 pylint="/opt/local/bin/pylint-3.12"
 python="/opt/local/bin/python3.12"
 shellcheck="/opt/local/bin/shellcheck"
+if ! type "${mypy}" &> /dev/null; then
+    echo "WARNING: the binary defined in \$mypy does not exist (Python checks will be skipped)"
+fi
 if ! type "${pylint}" &> /dev/null; then
     echo "WARNING: the binary defined in \$pylint does not exist (Python checks will be skipped)"
 fi
@@ -54,6 +64,34 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
+    # Print warning if there isn't a MyPy configuration file ...
+    if ! type "${mypy}" &> /dev/null; then
+        false
+    elif ! type "${python}" &> /dev/null; then
+        false
+    else
+        # Check if it is a Python module ...
+        if [[ -f ${init} ]]; then
+            printf "%-120s : " "Testing \"${prefix}\" using MyPy (as a Python module)"
+
+            # Clean the Python module ...
+            find "${prefix}" -type f -name "*.pyc" -delete
+            find "${prefix}" -type d -name "__pycache__" -delete
+
+            # Run MyPy on the Python module ...
+            ${mypy} --disable-error-code import-not-found --disable-error-code import-untyped "${prefix}" &> "${prefix}/mypy.log"
+
+            # Check if it is perfect ...
+            if grep -F "Success: no issues found" "${prefix}/mypy.log" &> /dev/null; then
+                echo "perfect"
+            else
+                tail -n 1 "${prefix}/mypy.log"
+            fi
+        fi
+    fi
+
+    # **************************************************************************
+
     # Print warning if there isn't a PyLint configuration file ...
     if ! type "${pylint}" &> /dev/null; then
         false
@@ -64,7 +102,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
     else
         # Check if it is a Python module ...
         if [[ -f ${init} ]]; then
-            printf "%-120s : " "Testing \"${prefix}\" (as a Python module)"
+            printf "%-120s : " "Testing \"${prefix}\" using PyLint (as a Python module)"
 
             # Clean the Python module ...
             find "${prefix}" -type f -name "*.pyc" -delete
@@ -106,7 +144,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
         # Check that there are some Python scripts ...
         if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
-            printf "%-120s : " "Testing \"${d}\" (as a Python script directory)"
+            printf "%-120s : " "Testing \"${d}\" using PyLint (as a Python script directory)"
 
             # Run PyLint on the Python script directory ...
             readarray -t fnames < "${tmp1}"
