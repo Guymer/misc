@@ -92,6 +92,46 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
+    # Print warning if there isn't a MyPy configuration file ...
+    if ! type "${mypy}" &> /dev/null; then
+        false
+    elif ! type "${python}" &> /dev/null; then
+        false
+    else
+        # Try to find all of the Python scripts that are not part of Git
+        # submodules or the Python module ...
+        tmp1="$(mktemp)"
+        tmp2="$(mktemp)"
+        find "${d}" -type f -name "*.py" | grep -v -F "/.git/" | grep -v -F "/build/" | grep -v -F "/_build/" | grep -v -E "^${prefix}/" | sort > "${tmp1}"
+        if [[ -f ${d}/.gitmodules ]]; then
+            while IFS= read -r m; do
+                grep -v -E "^${d}/${m}" "${tmp1}" > "${tmp2}"
+                cp "${tmp2}" "${tmp1}"
+            done < <(grep -F "path = " "${d}/.gitmodules" | cut -d "=" -f 2 | tr -d " ")
+        fi
+
+        # Check that there are some Python scripts ...
+        if [[ $(wc -l < "${tmp1}") -gt 0 ]]; then
+            printf "%-120s : " "Testing \"${d}\" using MyPy (as a Python script directory)"
+
+            # Run MyPy on the Python script directory ...
+            readarray -t fnames < "${tmp1}"
+            ${mypy} --disable-error-code import-not-found --disable-error-code import-untyped "${fnames[@]}" &> "${d}/mypy.log"
+
+            # Check if it is perfect ...
+            if grep -F "Success: no issues found" "${d}/mypy.log" &> /dev/null; then
+                echo "perfect"
+            else
+                tail -n 1 "${d}/mypy.log"
+            fi
+        fi
+
+        # Clean up ...
+        rm "${tmp1}" "${tmp2}"
+    fi
+
+    # **************************************************************************
+
     # Print warning if there isn't a PyLint configuration file ...
     if ! type "${pylint}" &> /dev/null; then
         false
