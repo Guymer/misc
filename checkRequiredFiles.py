@@ -4,14 +4,33 @@
 # NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
     # Import standard modules ...
+    import argparse
     import glob
     import os
+    import shutil
+    import subprocess
 
     # Import my modules ...
     try:
         import pyguymer3
     except:
         raise Exception("\"pyguymer3\" is not installed; run \"pip install --user PyGuymer3\"") from None
+
+    # **************************************************************************
+
+    # Create argument parser and parse the arguments ...
+    parser = argparse.ArgumentParser(
+           allow_abbrev = False,
+            description = "Add required files to GitHub repositories.",
+        formatter_class = argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "--timeout",
+        default = 60.0,
+           help = "the timeout for any requests/subprocess calls (in seconds)",
+           type = float,
+    )
+    args = parser.parse_args()
 
     # **************************************************************************
 
@@ -25,17 +44,24 @@ if __name__ == "__main__":
         dName = os.path.dirname(gName)
 
         # Skip this Git repository if it isn't on GitHub ...
-        if not pyguymer3.git_remote(dName).startswith("git@github.com:"):
+        if not pyguymer3.git_remote(
+            dName,
+            timeout = args.timeout,
+        ).startswith("git@github.com:"):
             continue
 
         # Find all files in the Git repository ...
-        gFiles = pyguymer3.git_files(dName)
+        gFiles = pyguymer3.git_files(
+            dName,
+            timeout = args.timeout,
+        )
 
         # Check that the basic required files are present ...
         for gFile in [
             ".editorconfig",
             ".github/FUNDING.yml",
             ".gitignore",
+            ".mypy.ini",
             ".pylintrc",
             ".shellcheckrc",
             "LICENCE.txt",
@@ -45,6 +71,19 @@ if __name__ == "__main__":
             if gFile in gFiles:
                 continue
             print(f"\"{dName}/{gFile}\" is missing.")
+            shutil.copy(
+                f"{os.path.dirname(os.path.realpath(__file__))}/{gFile}",
+                f"{dName}/{gFile}",
+            )
+            subprocess.run(
+                ["git", "add", "--intent-to-add", gFile],
+                   check = True,
+                     cwd = dName,
+                encoding = "utf-8",
+                  stderr = subprocess.DEVNULL,
+                  stdout = subprocess.DEVNULL,
+                 timeout = args.timeout,
+            )
 
         # Determine if it has any BASH scripts and check that the required
         # GitHub Action workflow YAML file is present ...
@@ -55,6 +94,19 @@ if __name__ == "__main__":
                 break
         if hasBash and ".github/workflows/shellcheck.yml" not in gFiles:
             print(f"\"{dName}/.github/workflows/shellcheck.yml\" is missing.")
+            shutil.copy(
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/shellcheck.yml",
+                f"{dName}/.github/workflows/shellcheck.yml",
+            )
+            subprocess.run(
+                ["git", "add", "--intent-to-add", ".github/workflows/shellcheck.yml"],
+                   check = True,
+                     cwd = dName,
+                encoding = "utf-8",
+                  stderr = subprocess.DEVNULL,
+                  stdout = subprocess.DEVNULL,
+                 timeout = args.timeout,
+            )
         if not hasBash and ".github/workflows/shellcheck.yml" in gFiles:
             print(f"\"{dName}/.github/workflows/shellcheck.yml\" is present but shouldn't be.")
 
@@ -67,6 +119,19 @@ if __name__ == "__main__":
                 break
         if hasFortran and ".github/workflows/gmake.yml" not in gFiles:
             print(f"\"{dName}/.github/workflows/gmake.yml\" is missing.")
+            shutil.copy(
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/gmake.yml",
+                f"{dName}/.github/workflows/gmake.yml",
+            )
+            subprocess.run(
+                ["git", "add", "--intent-to-add", ".github/workflows/gmake.yml"],
+                   check = True,
+                     cwd = dName,
+                encoding = "utf-8",
+                  stderr = subprocess.DEVNULL,
+                  stdout = subprocess.DEVNULL,
+                 timeout = args.timeout,
+            )
         if not hasFortran and ".github/workflows/gmake.yml" in gFiles:
             print(f"\"{dName}/.github/workflows/gmake.yml\" is present but shouldn't be.")
 
@@ -77,7 +142,45 @@ if __name__ == "__main__":
             if gFile.endswith(".py"):
                 hasPython = True
                 break
+        if hasPython and ".github/workflows/mypy.yaml" not in gFiles:
+            print(f"\"{dName}/.github/workflows/mypy.yaml\" is missing.")
+            shutil.copy(
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/mypy.yaml",
+                f"{dName}/.github/workflows/mypy.yaml",
+            )
+            subprocess.run(
+                ["git", "add", "--intent-to-add", ".github/workflows/mypy.yaml"],
+                   check = True,
+                     cwd = dName,
+                encoding = "utf-8",
+                  stderr = subprocess.DEVNULL,
+                  stdout = subprocess.DEVNULL,
+                 timeout = args.timeout,
+            )
+        if not hasPython and ".github/workflows/mypy.yaml" in gFiles:
+            print(f"\"{dName}/.github/workflows/mypy.yaml\" is present but shouldn't be.")
+
+        # Determine if it has any Python scripts and check that the required
+        # GitHub Action workflow YAML file is present ...
+        hasPython = False
+        for gFile in gFiles:
+            if gFile.endswith(".py"):
+                hasPython = True
+                break
         if hasPython and ".github/workflows/pylint.yml" not in gFiles:
             print(f"\"{dName}/.github/workflows/pylint.yml\" is missing.")
+            shutil.copy(
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/pylint.yml",
+                f"{dName}/.github/workflows/pylint.yml",
+            )
+            subprocess.run(
+                ["git", "add", "--intent-to-add", ".github/workflows/pylint.yml"],
+                   check = True,
+                     cwd = dName,
+                encoding = "utf-8",
+                  stderr = subprocess.DEVNULL,
+                  stdout = subprocess.DEVNULL,
+                 timeout = args.timeout,
+            )
         if not hasPython and ".github/workflows/pylint.yml" in gFiles:
             print(f"\"{dName}/.github/workflows/pylint.yml\" is present but shouldn't be.")
