@@ -111,7 +111,7 @@ if __name__ == "__main__":
     # **************************************************************************
 
     # Initialize database ...
-    funcs = {}
+    funcs : dict[str, list[str]] = {}
 
     # Loop over files in folder ...
     for fname in pyguymer3.return_file_list(
