@@ -92,14 +92,14 @@ if __name__ == "__main__":
             if gFile.endswith(".sh"):
                 hasBash = True
                 break
-        if hasBash and ".github/workflows/shellcheck.yml" not in gFiles:
-            print(f"\"{dName}/.github/workflows/shellcheck.yml\" is missing.")
+        if hasBash and ".github/workflows/shellcheck.yaml" not in gFiles:
+            print(f"\"{dName}/.github/workflows/shellcheck.yaml\" is missing.")
             shutil.copy(
-                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/shellcheck.yml",
-                f"{dName}/.github/workflows/shellcheck.yml",
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/shellcheck.yaml",
+                f"{dName}/.github/workflows/shellcheck.yaml",
             )
             subprocess.run(
-                ["git", "add", "--intent-to-add", ".github/workflows/shellcheck.yml"],
+                ["git", "add", "--intent-to-add", ".github/workflows/shellcheck.yaml"],
                    check = True,
                      cwd = dName,
                 encoding = "utf-8",
@@ -107,8 +107,8 @@ if __name__ == "__main__":
                   stdout = subprocess.DEVNULL,
                  timeout = args.timeout,
             )
-        if not hasBash and ".github/workflows/shellcheck.yml" in gFiles:
-            print(f"\"{dName}/.github/workflows/shellcheck.yml\" is present but shouldn't be.")
+        if not hasBash and ".github/workflows/shellcheck.yaml" in gFiles:
+            print(f"\"{dName}/.github/workflows/shellcheck.yaml\" is present but shouldn't be.")
 
         # Determine if it has any FORTRAN programs and check that the required
         # GitHub Action workflow YAML file is present ...
@@ -117,14 +117,14 @@ if __name__ == "__main__":
             if gFile.endswith(".f90") or gFile.endswith(".F90"):
                 hasFortran = True
                 break
-        if hasFortran and ".github/workflows/gmake.yml" not in gFiles:
-            print(f"\"{dName}/.github/workflows/gmake.yml\" is missing.")
+        if hasFortran and ".github/workflows/gmake.yaml" not in gFiles:
+            print(f"\"{dName}/.github/workflows/gmake.yaml\" is missing.")
             shutil.copy(
-                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/gmake.yml",
-                f"{dName}/.github/workflows/gmake.yml",
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/gmake.yaml",
+                f"{dName}/.github/workflows/gmake.yaml",
             )
             subprocess.run(
-                ["git", "add", "--intent-to-add", ".github/workflows/gmake.yml"],
+                ["git", "add", "--intent-to-add", ".github/workflows/gmake.yaml"],
                    check = True,
                      cwd = dName,
                 encoding = "utf-8",
@@ -132,8 +132,8 @@ if __name__ == "__main__":
                   stdout = subprocess.DEVNULL,
                  timeout = args.timeout,
             )
-        if not hasFortran and ".github/workflows/gmake.yml" in gFiles:
-            print(f"\"{dName}/.github/workflows/gmake.yml\" is present but shouldn't be.")
+        if not hasFortran and ".github/workflows/gmake.yaml" in gFiles:
+            print(f"\"{dName}/.github/workflows/gmake.yaml\" is present but shouldn't be.")
 
         # Determine if it has any Python scripts and check that the required
         # GitHub Action workflow YAML file is present ...
@@ -167,14 +167,14 @@ if __name__ == "__main__":
             if gFile.endswith(".py"):
                 hasPython = True
                 break
-        if hasPython and ".github/workflows/pylint.yml" not in gFiles:
-            print(f"\"{dName}/.github/workflows/pylint.yml\" is missing.")
+        if hasPython and ".github/workflows/pylint.yaml" not in gFiles:
+            print(f"\"{dName}/.github/workflows/pylint.yaml\" is missing.")
             shutil.copy(
-                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/pylint.yml",
-                f"{dName}/.github/workflows/pylint.yml",
+                f"{os.path.dirname(os.path.realpath(__file__))}/.github/workflows/pylint.yaml",
+                f"{dName}/.github/workflows/pylint.yaml",
             )
             subprocess.run(
-                ["git", "add", "--intent-to-add", ".github/workflows/pylint.yml"],
+                ["git", "add", "--intent-to-add", ".github/workflows/pylint.yaml"],
                    check = True,
                      cwd = dName,
                 encoding = "utf-8",
@@ -182,5 +182,5 @@ if __name__ == "__main__":
                   stdout = subprocess.DEVNULL,
                  timeout = args.timeout,
             )
-        if not hasPython and ".github/workflows/pylint.yml" in gFiles:
-            print(f"\"{dName}/.github/workflows/pylint.yml\" is present but shouldn't be.")
+        if not hasPython and ".github/workflows/pylint.yaml" in gFiles:
+            print(f"\"{dName}/.github/workflows/pylint.yaml\" is present but shouldn't be.")
