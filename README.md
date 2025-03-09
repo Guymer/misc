@@ -1,3 +1,5 @@
+!["gmake" GitHub Action Status](https://github.com/Guymer/misc/actions/workflows/gmake.yaml/badge.svg) !["mypy" GitHub Action Status](https://github.com/Guymer/misc/actions/workflows/mypy.yaml/badge.svg) !["pylint" GitHub Action Status](https://github.com/Guymer/misc/actions/workflows/pylint.yaml/badge.svg) !["shellcheck" GitHub Action Status](https://github.com/Guymer/misc/actions/workflows/shellcheck.yaml/badge.svg)
+
 This repository contains a few random little things that do not fit in anywhere else.
 
 ## Contents
