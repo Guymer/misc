@@ -59,11 +59,13 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
-    # Check that we can run MyPy ...
+    # Print warning if there isn't a MyPy configuration file ...
     if ! type "${mypy}" &> /dev/null; then
         false
     elif ! type "${python}" &> /dev/null; then
         false
+    elif [[ ! -f ${d}/.mypy.ini ]]; then
+        echo "WARNING: \"${d}\" is missing a MyPy configuration file"
     else
         # Check if it is a Python module ...
         if [[ -f ${init} ]]; then
@@ -88,11 +90,13 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
     # **************************************************************************
 
-    # Check that we can run MyPy ...
+    # Print warning if there isn't a MyPy configuration file ...
     if ! type "${mypy}" &> /dev/null; then
         false
     elif ! type "${python}" &> /dev/null; then
         false
+    elif [[ ! -f ${d}/.mypy.ini ]]; then
+        echo "WARNING: \"${d}\" is missing a MyPy configuration file"
     else
         # Try to find all of the Python scripts that are not part of Git
         # submodules or the Python module ...
