@@ -40,15 +40,12 @@ if __name__ == "__main__":
         if not os.path.isdir(gName):
             continue
 
-        # Create short-hand ...
+        # Create short-hands ...
         dName = os.path.dirname(gName)
-
-        # Skip this Git repository if it isn't on GitHub ...
-        if not pyguymer3.git_remote(
+        onGitHub = pyguymer3.git_remote(
             dName,
             timeout = args.timeout,
-        ).startswith("git@github.com:"):
-            continue
+        ).startswith("git@github.com:")
 
         # Find all files in the Git repository ...
         gFiles = pyguymer3.git_files(
@@ -57,17 +54,21 @@ if __name__ == "__main__":
         )
 
         # Check that the basic required files are present ...
-        for gFile in [
+        requiredFiles = [
             ".editorconfig",
-            ".github/FUNDING.yml",
             ".gitignore",
             ".mypy.ini",
             ".pylintrc",
             ".shellcheckrc",
-            "LICENCE.txt",
             "README.md",
             "requirements.txt",
-        ]:
+        ]
+        if onGitHub:
+            requiredFiles += [
+                ".github/FUNDING.yml",
+                "LICENCE.txt",
+            ]
+        for gFile in requiredFiles:
             if gFile in gFiles:
                 continue
             print(f"\"{dName}/{gFile}\" is missing.")
@@ -84,6 +85,10 @@ if __name__ == "__main__":
                   stdout = subprocess.DEVNULL,
                  timeout = args.timeout,
             )
+
+        # Skip Git repository if it is not published on GitHub ...
+        if not onGitHub:
+            continue
 
         # Determine if it has any BASH scripts and check that the required
         # GitHub Action workflow YAML file is present ...
