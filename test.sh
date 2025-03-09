@@ -11,12 +11,6 @@ if ! type mktemp &> /dev/null; then
     exit 1
 fi
 
-# NOTE: Currently, the following MyPy checks are hard-coded to be disabled (so
-#       that I can concentrate on fixing all the others first):
-#         * attr-defined
-#         * import-not-found
-#         * import-untyped
-
 # NOTE: Currently, the following PyLint checks are hard-coded to be disabled (so
 #       that I can concentrate on fixing all the others first):
 #         * C0301 - Line too long
@@ -81,9 +75,6 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
             # Run MyPy on the Python module ...
             ${mypy}                                                             \
-                --disable-error-code attr-defined                               \
-                --disable-error-code import-not-found                           \
-                --disable-error-code import-untyped                             \
                 "${prefix}" &> "${prefix}/mypy.log"
 
             # Check if it is perfect ...
@@ -122,9 +113,6 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
             # Run MyPy on the Python script directory ...
             readarray -t fnames < "${tmp1}"
             ${mypy}                                                             \
-                --disable-error-code attr-defined                               \
-                --disable-error-code import-not-found                           \
-                --disable-error-code import-untyped                             \
                 "${fnames[@]}" &> "${d}/mypy.log"
 
             # Check if it is perfect ...
