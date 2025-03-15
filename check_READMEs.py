@@ -44,7 +44,6 @@ if __name__ == "__main__":
 
     # Define a list of Python modules which are not published on Pip ...
     unpublishedModules = [
-        "pyguymer3",
         "sphinx_fortran",
     ]
 
