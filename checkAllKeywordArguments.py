@@ -158,6 +158,8 @@ if __name__ == "__main__":
                 # Find all the keyword-only arguments that are passed ...
                 keywords = []
                 for keyword in node.keywords:
+                    if not keyword.arg:
+                        continue
                     keywords.append(keyword.arg)
 
                 # Loop over keyword-only arguments that *should* be passed ...
