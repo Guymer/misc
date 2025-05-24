@@ -42,6 +42,10 @@ if __name__ == "__main__":
 
         # Create short-hands ...
         dName = os.path.dirname(gName)
+        onGist = pyguymer3.git_remote(
+            dName,
+            timeout = args.timeout,
+        ).startswith("git@gist.github.com:")
         onGitHub = pyguymer3.git_remote(
             dName,
             timeout = args.timeout,
@@ -63,13 +67,15 @@ if __name__ == "__main__":
             "README.md",
             "requirements.txt",
         ]
-        if onGitHub:
+        if onGist or onGitHub:
             requiredFiles += [
                 ".github/FUNDING.yml",
                 "LICENCE.txt",
             ]
         for gFile in requiredFiles:
             if gFile in gFiles:
+                continue
+            if onGist and "/" in gFile: # NOTE: Gist cannot handle sub-folders.
                 continue
             print(f"\"{dName}/{gFile}\" is missing.")
             shutil.copy(
