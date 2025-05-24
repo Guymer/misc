@@ -69,6 +69,7 @@ if __name__ == "__main__":
             "coastlines_zorder",        # pyguymer3.geo.add_axis()
             "cookies",                  # Lots of functions.
             "crf",                      # pyguymer3.media.images2mp4()
+            "ensureNFC",                # Lots of functions.
             "eps",                      # Lots of functions.
             "extent",                   # pyguymer3.geo.add_map_background()
             "form",                     # pyguymer3.media.images2mp4()
@@ -91,6 +92,7 @@ if __name__ == "__main__":
             "profile",                  # pyguymer3.media.images2mp4()
             "quality",                  # Lots of functions.
             "ramLimit",                 # Lots of functions.
+            "setModificationTime",      # Lots of functions.
             "strict",                   # pyguymer3.geo.getRecordAttribute()
             "tol",                      # Lots of functions.
             "useSciPy",                 # pyguymer3.geo.find_middle_of_locs()
