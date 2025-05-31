@@ -73,6 +73,37 @@ def checkLegend(nodeIn, fnameIn, /):
     print(f"\"{fnameIn}\" adds a legend to \"{nodeIn.func.value.id}\" without specifying the location.")
 
 # Define function ...
+def checkMap(nodeIn, fnameIn, /):
+    """
+    Check that all "map()" calls specify the strictness.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
+        return
+    if not isinstance(nodeIn.func, ast.Name):                                   # pylint: disable=E0606
+        return
+
+    # Skip this node if it is not a "map()" call ...
+    if nodeIn.func.id != "map":
+        return
+
+    # Loop over keyword arguments ...
+    for kwArg in ["strict",]:
+        # Skip this node if it sets the "map()" keyword argument ...
+        skip = False
+        for keyword in nodeIn.keywords:
+            if keyword.arg == kwArg:
+                skip = True
+                break
+        if skip:
+            continue
+
+        # Print ...
+        print(f"\"{fnameIn}\" uses \"map()\" without specifying the {kwArg}.")
+
+# Define function ...
 def checkPost(nodeIn, fnameIn, /):
     """
     Check that all "requests.post()" calls specify the timeout.
@@ -240,6 +271,7 @@ if __name__ == "__main__":
                 # Check everything ...
                 checkAddArgument(node, fname)
                 checkLegend(node, fname)
+                checkMap(node, fname)
                 checkPost(node, fname)
                 checkRun(node, fname)
                 checkZip(node, fname)
