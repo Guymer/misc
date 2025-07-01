@@ -59,6 +59,12 @@ if __name__ == "__main__":
 
             "angConv",                  # pyguymer3.geo.find_min_max_dist_bearing()
             "background",               # Lots of functions.
+            "calcAdaptive",             # Lots of functions.
+            "calcAverage",              # Lots of functions.
+            "calcNone",                 # Lots of functions.
+            "calcPaeth",                # Lots of functions.
+            "calcSub",                  # Lots of functions.
+            "calcUp",                   # Lots of functions.
             "chunksize",                # Lots of functions.
             "coastlines_edgecolor",     # pyguymer3.geo.add_axis()
             "coastlines_facecolor",     # pyguymer3.geo.add_axis()
