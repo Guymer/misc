@@ -51,6 +51,7 @@ if __name__ == "__main__":
     # installation names ...
     python2pip = {
               "PIL" : "pillow",
+        "pyguymer3" : "pyguymer3 >= 0.0.9",                                     # Some functions were renamed.
         "shapefile" : "pyshp",
     }
 
