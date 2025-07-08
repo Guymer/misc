@@ -50,9 +50,10 @@ if __name__ == "__main__":
     # Define a dictionary mapping Python module import names to Pip package
     # installation names ...
     python2pip = {
-              "PIL" : "pillow",
-        "pyguymer3" : "pyguymer3 >= 0.0.9",                                     # Some functions were renamed.
-        "shapefile" : "pyshp",
+        "matplotlib" : "matplotlib >= 3.5.0",                                   # "labels" was added to "matplotlib.axes.Axes.set_xticks()".
+               "PIL" : "pillow >= 8.0.0",                                       # "anchor" was implemented in "PIL.ImageDraw.text()".
+         "pyguymer3" : "pyguymer3 >= 0.0.10",                                   # "fov" was added to "pyguymer3.geo.add_NE_map_underlay()".
+         "shapefile" : "pyshp",
     }
 
     # Loop over READMEs ...
