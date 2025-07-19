@@ -249,7 +249,7 @@ if __name__ == "__main__":
                         if keyword.arg in funcs[key]:
                             flags[keyword.arg] = True
                             continue
-                        raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
+                        raise Exception(f"{fname} » {srcGuess} » \"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
                             if args.lite and keyword in args.unImpKwArgs:
@@ -266,7 +266,7 @@ if __name__ == "__main__":
                         if keyword.arg in funcs[key]:
                             flags[keyword.arg] = True
                             continue
-                        raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
+                        raise Exception(f"{fname} » {srcGuess} » \"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
                             if args.lite and keyword in args.unImpKwArgs:
@@ -283,7 +283,7 @@ if __name__ == "__main__":
                         if keyword.arg in funcs[key]:
                             flags[keyword.arg] = True
                             continue
-                        raise Exception(f"\"{keyword.arg}\" is specified but it is not a recognised keyword")
+                        raise Exception(f"{fname} » {srcGuess} » \"{keyword.arg}\" is specified but it is not a recognised keyword")
                     for keyword, flag in flags.items():
                         if flag:
                             if args.lite and keyword in args.unImpKwArgs:
