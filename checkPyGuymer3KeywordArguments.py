@@ -65,6 +65,7 @@ if __name__ == "__main__":
             "calcPaeth",                # Lots of functions.
             "calcSub",                  # Lots of functions.
             "calcUp",                   # Lots of functions.
+            "choices",                  # Lots of functions.
             "chunksize",                # Lots of functions.
             "coastlines_edgecolor",     # pyguymer3.geo.add_axis()
             "coastlines_facecolor",     # pyguymer3.geo.add_axis()
