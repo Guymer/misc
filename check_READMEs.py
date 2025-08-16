@@ -51,6 +51,7 @@ if __name__ == "__main__":
     # installation names ...
     python2pip = {
                "fmc" : "fmc >= 0.0.5",                                          # Latest version from https://github.com/Guymer/fmc
+               "gst" : "gst >= 0.0.1",                                          # Latest version from https://github.com/Guymer/gst
         "matplotlib" : "matplotlib >= 3.5.0",                                   # "labels" was added to "matplotlib.axes.Axes.set_xticks()".
                "PIL" : "pillow >= 8.0.0",                                       # "anchor" was implemented in "PIL.ImageDraw.text()".
          "pyguymer3" : "pyguymer3 >= 0.0.12",                                   # Latest version from https://github.com/Guymer/PyGuymer3
