@@ -50,6 +50,7 @@ if __name__ == "__main__":
     # Define a dictionary mapping Python module import names to Pip package
     # installation names ...
     python2pip = {
+          "exifread" : "exifread >= 3.1.0",                                     # "builtin_types" was added to "exifread.process_file()".
                "fmc" : "fmc >= 0.0.5",                                          # Latest version from https://github.com/Guymer/fmc
                "gst" : "gst >= 0.0.1",                                          # Latest version from https://github.com/Guymer/gst
         "matplotlib" : "matplotlib >= 3.5.0",                                   # "labels" was added to "matplotlib.axes.Axes.set_xticks()".
