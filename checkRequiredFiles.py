@@ -62,7 +62,7 @@ if __name__ == "__main__":
             ".editorconfig",
             ".gitignore",
             ".mypy.ini",
-            ".pylintrc",
+            ".pylint.ini",
             ".shellcheckrc",
             "README.md",
             "requirements.txt",
