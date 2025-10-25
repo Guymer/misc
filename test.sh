@@ -138,7 +138,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
         false
     elif ! type "${python}" &> /dev/null; then
         false
-    elif [[ ! -f ${d}/.pylintrc ]]; then
+    elif [[ ! -f ${d}/.pylint.ini ]]; then
         echo "WARNING: \"${d}\" is missing a PyLint configuration file"
     else
         # Check if it is a Python module ...
@@ -151,7 +151,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
 
             # Run PyLint on the Python module ...
             ${pylint}                                                           \
-                --rcfile="${d}/.pylintrc"                                       \
+                --rcfile="${d}/.pylint.ini"                                     \
                 --disable=C0301,R0801                                           \
                 "${prefix}" &> "${prefix}/pylint.log"
 
@@ -171,7 +171,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
         false
     elif ! type "${python}" &> /dev/null; then
         false
-    elif [[ ! -f ${d}/.pylintrc ]]; then
+    elif [[ ! -f ${d}/.pylint.ini ]]; then
         echo "WARNING: \"${d}\" is missing a PyLint configuration file"
     else
         # Try to find all of the Python scripts that are not part of Git
@@ -193,7 +193,7 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
             # Run PyLint on the Python script directory ...
             readarray -t fnames < "${tmp1}"
             ${pylint}                                                           \
-                --rcfile="${d}/.pylintrc"                                       \
+                --rcfile="${d}/.pylint.ini"                                     \
                 --disable=C0301,R0801                                           \
                 "${fnames[@]}" &> "${d}/pylint.log"
 
