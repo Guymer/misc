@@ -96,16 +96,12 @@ if __name__ == "__main__":
                 # Append this keyword-only argument to the database ...
                 funcs[body.name].append(body.args.kwonlyargs[iKwArg].arg)
 
-    # **************************************************************************
+            # Skip this function if its keyword-only arguments are already sorted ...
+            if funcs[body.name] == sorted(funcs[body.name], key = str.lower):
+                continue
 
-    # Loop over functions and their keyword-only arguments ...
-    for func, keywords in funcs.items():
-        # Skip this function if its keyword-only arguments are already sorted ...
-        if keywords == sorted(keywords, key = str.lower):
-            continue
-
-        # Print ...
-        print(f"The keyword-only arguments of \"{func}()\" in \"{fname}\" are not sorted.")
+            # Print ...
+            print(f"The keyword-only arguments of \"{body.name}()\" in \"{fname}\" are not sorted.")
 
     # **************************************************************************
 
