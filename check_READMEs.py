@@ -42,11 +42,6 @@ if __name__ == "__main__":
     standardModules.append("funcs")
     standardModules.append("web_mod")
 
-    # Define a list of Python modules which are not published on Pip ...
-    unpublishedModules = [
-        "sphinx_fortran",
-    ]
-
     # Define a dictionary mapping Python module import names to Pip package
     # installation names ...
     python2pip = {
@@ -131,7 +126,7 @@ if __name__ == "__main__":
             continue
 
         # As Sphinx is not imported it is easy for this script to miss Sphinx
-        # requirements, so make sure that Sphinx is there is the Sphinx theme is
+        # requirements, so make sure that Sphinx is there if the Sphinx theme is
         # imported ...
         if "sphinx_rtd_theme" in modules:
             if "sphinx" not in modules:
@@ -159,8 +154,6 @@ if __name__ == "__main__":
 
             # Write imported non-standard modules ...
             for module in sorted(modules):
-                if module in unpublishedModules:
-                    continue
                 if module in [
                     "meson",
                     "ninja",
