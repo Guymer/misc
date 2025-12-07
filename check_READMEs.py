@@ -45,6 +45,7 @@ if __name__ == "__main__":
     # Define a dictionary mapping Python module import names to Pip package
     # installation names ...
     python2pip = {
+           "cartopy" : "cartopy > 0.25.0",                                      # "**kwargs" was added to "background_img()"; cache clashes are avoided; Thunderforest tiles were added.
           "exifread" : "exifread >= 3.1.0",                                     # "builtin_types" was added to "exifread.process_file()".
                "fmc" : "fmc >= 0.0.5",                                          # Latest version from https://github.com/Guymer/fmc
                "gft" : "gft >= 0.0.1",                                          # Latest version from https://github.com/Guymer/gft
