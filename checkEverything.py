@@ -42,6 +42,62 @@ def checkAddArgument(nodeIn, fnameIn, /):
     print(f"\"{fnameIn}\" adds the argument \"{nodeIn.args[0].value}\" without specifying the type.")
 
 # Define function ...
+def checkCartopy(nodeIn, fnameIn, /):
+    """
+    Check that all "ax*.stock_img()", "ax*.background_img()", "ax*.add_image()",
+    "ax*.imshow()" and "ax*.pcolormesh()" calls specify the regrid shape but not
+    the interpolation or the resampling.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
+        return
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
+        return
+
+    # Skip this node if it is not a "ax*.stock_img()" call or a
+    # "ax*.background_img()" call or a "ax*.add_image()" call or a
+    # "ax*.imshow()" call or a "ax*.pcolormesh()" call ...
+    if nodeIn.func.attr not in [
+        "stock_img",
+        "background_img",
+        "add_image",
+        "imshow",
+        "pcolormesh",
+    ]:
+        return
+    if not nodeIn.func.value.id.startswith("ax"):
+        return
+
+    # Print message if this node does not set the regrid shape ...
+    setsKeyword = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "regrid_shape":
+            setsKeyword = True
+            break
+    if not setsKeyword:
+        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call without specifying \"regrid_shape\".")
+
+    # Print message if this node sets the interpolation ...
+    setsKeyword = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "interpolation":
+            setsKeyword = True
+            break
+    if setsKeyword:
+        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"interpolation\".")
+
+    # Print message if this node sets the resample ...
+    setsKeyword = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "resample":
+            setsKeyword = True
+            break
+    if setsKeyword:
+        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"resample\".")
+
+# Define function ...
 def checkLegend(nodeIn, fnameIn, /):
     """
     Check that all "ax*.legend()" calls specify the location.
@@ -54,7 +110,7 @@ def checkLegend(nodeIn, fnameIn, /):
     if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
         return
 
-    # Skip this node if it is not a "ax.legend()" call ...
+    # Skip this node if it is not a "ax*.legend()" call ...
     if nodeIn.func.attr != "legend":
         return
     if not nodeIn.func.value.id.startswith("ax"):
@@ -270,6 +326,7 @@ if __name__ == "__main__":
             for node in ast.walk(body):
                 # Check everything ...
                 checkAddArgument(node, fname)
+                checkCartopy(node, fname)
                 checkLegend(node, fname)
                 checkMap(node, fname)
                 checkPost(node, fname)
