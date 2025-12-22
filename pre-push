@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Make all repositories use this pre-push hook by running the command:
+#     git config --global core.hooksPath ~/.githooks
+
+# Create short-hands ...
+remote="${1}"
+url="${2}"
+
+# Check that there are *.py files in the repository ...
+if [ $(git ls-files "*.py" | sort | wc -l) -gt 0 ]; then
+    # Run PyLint ...
+    echo "Running PyLint on all *.py files ..."
+    pylint --rcfile=.pylint.ini --errors-only $(git ls-files "*.py" | sort)
+fi
+
+# Check that there are *.sh files in the repository ...
+if [ $(git ls-files "*.sh" | sort | wc -l) -gt 0 ]; then
+    # Run ShellCheck ...
+    echo "Running ShellCheck on all *.sh files ..."
+    shellcheck --severity=error $(git ls-files "*.sh" | sort)
+fi
