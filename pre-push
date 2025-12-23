@@ -10,7 +10,7 @@ git ls-files "*.py" | sort > "${t}"
 n="$(wc -l "${t}" | cut -f 2 -w)"
 
 # Check that there are *.py files in the repository ...
-if [[ ${n} -gt 0 ]]; then
+if [ "${n}" -gt 0 ]; then
     # Run PyLint ...
     echo "Running PyLint on ${n} *.py files ..."
     pylint --rcfile=.pylint.ini --errors-only $(cat "${t}") || exit 1
@@ -23,7 +23,7 @@ git ls-files "*.sh" | sort > "${t}"
 n="$(wc -l "${t}" | cut -f 2 -w)"
 
 # Check that there are *.sh files in the repository ...
-if [[ ${n} -gt 0 ]]; then
+if [ "${n}" -gt 0 ]; then
     # Run ShellCheck ...
     echo "Running ShellCheck on ${n} *.sh files ..."
     shellcheck --severity=error $(cat "${t}") || exit 1
