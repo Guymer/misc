@@ -3,16 +3,28 @@
 # NOTE: Make all repositories use this pre-push hook by running the command:
 #         * git config --global core.hooksPath ~/.githooks
 
+# Save a list of all the *.py files there are in the repository and use it to
+# count how many there are too ...
+t="$(mktemp)"
+git ls-files "*.py" | sort > "${t}"
+n="$(wc -l "${t}" | cut -f 2 -w)"
+
 # Check that there are *.py files in the repository ...
-if [ $(git ls-files "*.py" | sort | wc -l) -gt 0 ]; then
+if [[ ${n} -gt 0 ]]; then
     # Run PyLint ...
-    echo "Running PyLint on all *.py files ..."
-    pylint --rcfile=.pylint.ini --errors-only $(git ls-files "*.py" | sort) || exit 1
+    echo "Running PyLint on ${n} *.py files ..."
+    pylint --rcfile=.pylint.ini --errors-only $(cat "${t}") || exit 1
 fi
 
+# Save a list of all the *.sh files there are in the repository and use it to
+# count how many there are too ...
+t="$(mktemp)"
+git ls-files "*.sh" | sort > "${t}"
+n="$(wc -l "${t}" | cut -f 2 -w)"
+
 # Check that there are *.sh files in the repository ...
-if [ $(git ls-files "*.sh" | sort | wc -l) -gt 0 ]; then
+if [[ ${n} -gt 0 ]]; then
     # Run ShellCheck ...
-    echo "Running ShellCheck on all *.sh files ..."
-    shellcheck --severity=error $(git ls-files "*.sh" | sort) || exit 1
+    echo "Running ShellCheck on ${n} *.sh files ..."
+    shellcheck --severity=error $(cat "${t}") || exit 1
 fi
