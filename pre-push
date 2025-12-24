@@ -29,7 +29,7 @@ if [ -f .pylint.ini ]; then
     git ls-files "*.py" | sort > "${t}"
 
     # Check that no *.py files have a space in their file name ...
-    if ! grep -F " " "${t}" 2> /dev/null > /dev/null; then
+    if grep -F " " "${t}" 2> /dev/null > /dev/null; then
         echo "ERROR: There is a *.py file which has a space in its file name." >&2
         exit 1
     fi
@@ -55,7 +55,7 @@ if [ -f .shellcheckrc ]; then
     git ls-files "*.sh" | sort > "${t}"
 
     # Check that no *.sh files have a space in their file name ...
-    if ! grep -F " " "${t}" 2> /dev/null > /dev/null; then
+    if grep -F " " "${t}" 2> /dev/null > /dev/null; then
         echo "ERROR: There is a *.sh file which has a space in its file name." >&2
         exit 1
     fi
