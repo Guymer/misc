@@ -1,8 +1,15 @@
-[user]
-    name = Thomas Guymer
-    email = user@example.com
 [commit]
     gpgsign = true
 [core]
     excludesFile = /path/to/.gitignore
+    hooksPath = /path/to/.githooks
     pager = less -r
+[init]
+    defaultBranch = main
+[instaweb]
+    httpd = python
+    local = true
+[user]
+    email = user@example.com
+    name = User Name
+    signingkey = ABCDEFGHIJKLMNOPQRSTUVWXYZ
