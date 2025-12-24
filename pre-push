@@ -41,7 +41,10 @@ if [ -f .pylint.ini ]; then
     if [ "${n}" -gt 0 ]; then
         # Run PyLint ...
         echo "Running PyLint on ${n} *.py files ..."
-        pylint --rcfile=.pylint.ini --errors-only $(cat "${t}") || exit 1
+        if ! pylint --rcfile=.pylint.ini --errors-only $(cat "${t}"); then
+            echo "ERROR: PyLint failed." >&2
+            exit 1
+        fi
     fi
 fi
 
@@ -64,6 +67,9 @@ if [ -f .shellcheckrc ]; then
     if [ "${n}" -gt 0 ]; then
         # Run ShellCheck ...
         echo "Running ShellCheck on ${n} *.sh files ..."
-        shellcheck --severity=error $(cat "${t}") || exit 1
+        if ! shellcheck --severity=error $(cat "${t}"); then
+            echo "ERROR: ShellCheck failed." >&2
+            exit 1
+        fi
     fi
 fi
