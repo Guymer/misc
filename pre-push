@@ -1,13 +1,32 @@
 #!/bin/sh
 
-# NOTE: Make all repositories use this pre-push hook by running the command:
-#         * git config --global core.hooksPath ~/.githooks
+# Check that non-standard programs are installed. "standard" programs are
+# anything that is specified in the POSIX.1-2008 standard (and the IEEE Std
+# 1003.1 standard). Therefore, "non-standard" programs are anything that does
+# not appear on the following list:
+#   * https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
+if ! type git 2> /dev/null > /dev/null; then
+    echo "ERROR: \"git\" is not installed." >&2
+    exit 1
+fi
+if ! type mktemp 2> /dev/null > /dev/null; then
+    echo "ERROR: \"mktemp\" is not installed." >&2
+    exit 1
+fi
+if ! type pylint 2> /dev/null > /dev/null; then
+    echo "ERROR: \"pylint\" is not installed." >&2
+    exit 1
+fi
+if ! type shellcheck 2> /dev/null > /dev/null; then
+    echo "ERROR: \"shellcheck\" is not installed." >&2
+    exit 1
+fi
 
 # Save a list of all the *.py files there are in the repository and use it to
-# count how many there are too ...
+# count how many there are ...
 t="$(mktemp)"
 git ls-files "*.py" | sort > "${t}"
-n="$(wc -l "${t}" | cut -f 2 -w)"
+n="$(wc -l "${t}" | cut -f 2 -w)"                                               # [#]
 
 # Check that there are *.py files in the repository ...
 if [ "${n}" -gt 0 ]; then
@@ -17,10 +36,10 @@ if [ "${n}" -gt 0 ]; then
 fi
 
 # Save a list of all the *.sh files there are in the repository and use it to
-# count how many there are too ...
+# count how many there are ...
 t="$(mktemp)"
 git ls-files "*.sh" | sort > "${t}"
-n="$(wc -l "${t}" | cut -f 2 -w)"
+n="$(wc -l "${t}" | cut -f 2 -w)"                                               # [#]
 
 # Check that there are *.sh files in the repository ...
 if [ "${n}" -gt 0 ]; then
