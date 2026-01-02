@@ -92,7 +92,7 @@ if __name__ == "__main__":
             "method",                   # Lots of functions.
             "minimize_size",            # Lots of functions.
             "name",                     # pyguymer3.geo.add_map_background()
-            "physical",                 # pyguymer3.geo.add_NE_map_underlay()
+            "physical",                 # pyguymer3.geo.add_NE_map()
             "pool",                     # Lots of functions.
             "prefix",                   # Lots of functions.
             "progressive",              # Lots of functions.
