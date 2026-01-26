@@ -59,6 +59,7 @@ if __name__ == "__main__":
 
             "angConv",                  # pyguymer3.geo.find_min_max_dist_bearing()
             "background",               # Lots of functions.
+            "cacheDir",                 # Lots of functions.
             "calcAdaptive",             # Lots of functions.
             "calcAverage",              # Lots of functions.
             "calcNone",                 # Lots of functions.
@@ -74,6 +75,7 @@ if __name__ == "__main__":
             "coastlines_linewidth",     # pyguymer3.geo.add_axis()
             "coastlines_resolution",    # pyguymer3.geo.add_axis()
             "coastlines_zorder",        # pyguymer3.geo.add_axis()
+            "configureAgain",           # Lots of functions.
             "cookies",                  # Lots of functions.
             "crf",                      # pyguymer3.media.images2mp4()
             "ensureNFC",                # Lots of functions.
@@ -86,17 +88,23 @@ if __name__ == "__main__":
             "gridlines_linewidth",      # pyguymer3.geo.add_axis()
             "gridlines_zorder",         # pyguymer3.geo.add_axis()
             "headers",                  # Lots of functions.
+            "iceOcean",                 # pyguymer3.geo.add_GSHHG_map()
             "ignorableFiles",           # pyguymer3.remove_almost_empty_directories()
+            "islandLake",               # pyguymer3.geo.add_GSHHG_map()
+            "lakeLand",                 # pyguymer3.geo.add_GSHHG_map()
+            "landOcean",                # pyguymer3.geo.add_GSHHG_map()
             "level",                    # pyguymer3.media.images2mp4()
             "lossless",                 # Lots of functions.
+            "maxImagePixels",           # Lots of functions.
             "method",                   # Lots of functions.
             "minimize_size",            # Lots of functions.
             "name",                     # pyguymer3.geo.add_map_background()
             "physical",                 # pyguymer3.geo.add_NE_map()
+            "pondIsland",               # pyguymer3.geo.add_GSHHG_map()
             "pool",                     # Lots of functions.
             "prefix",                   # Lots of functions.
-            "progressive",              # Lots of functions.
             "profile",                  # pyguymer3.media.images2mp4()
+            "progressive",              # Lots of functions.
             "quality",                  # Lots of functions.
             "ramLimit",                 # Lots of functions.
             "setModificationTime",      # Lots of functions.
