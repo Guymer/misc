@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Check that non-standard programs are installed. "standard" programs are
+# anything that is specified in the POSIX.1-2008 standard (and the IEEE Std
+# 1003.1 standard). Therefore, "non-standard" programs are anything that does
+# not appear on the following list:
+#   * https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
+if ! type git 2> /dev/null > /dev/null; then
+    echo "ERROR: \"git\" is not installed." >&2
+    exit 1
+fi
+
+# Make list of files tracked by Git ...
+if ! git ls-tree --full-tree -r --name-only HEAD | sort > git-files.txt; then
+    echo "ERROR: Git failed." >&2
+    exit 1
+fi
