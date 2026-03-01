@@ -24,13 +24,6 @@ if __name__ == "__main__":
     except:
         raise Exception("\"shapely\" is not installed; run \"pip install --user Shapely\"") from None
 
-    # Import my modules ...
-    try:
-        import pyguymer3
-        import pyguymer3.geo
-    except:
-        raise Exception("\"pyguymer3\" is not installed; run \"pip install --user PyGuymer3\"") from None
-
     # **************************************************************************
 
     # Make output folder if it is missing ...
