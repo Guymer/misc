@@ -89,10 +89,10 @@ if __name__ == "__main__":
                 db[record.attributes["id"]] = {
                     "attributes" : record.attributes,
                       "geometry" : {
-                                "area" : record.geometry.area,
-                              "bounds" : record.geometry.bounds,
-                            "centroid" : (record.geometry.centroid.x, record.geometry.centroid.y),
-                            "exterior" : {
+                                     "area" : record.geometry.area,
+                                   "bounds" : record.geometry.bounds,
+                                 "centroid" : (record.geometry.centroid.x, record.geometry.centroid.y),
+                                 "exterior" : {
                             "is_closed" : record.geometry.exterior.is_closed,
                               "is_ring" : record.geometry.exterior.is_ring,
                             "is_simple" : record.geometry.exterior.is_simple,
