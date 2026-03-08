@@ -1,0 +1,93 @@
+.bashrc
+.config/yt-dlp/config
+.editorconfig
+.get_iplayer/options
+.gitattributes
+.gitconfig
+.github/FUNDING.yml
+.github/workflows/gmake.yaml
+.github/workflows/mypy.yaml
+.github/workflows/pylint.yaml
+.github/workflows/shellcheck.yaml
+.gitignore
+.gitmodules
+.mypy.ini
+.pylint.ini
+.readthedocs.yaml
+.shellcheckrc
+.ssh/config
+.tcshrc
+.vimrc
+.wgetrc
+.zshrc
+branch.sh
+check_READMEs.py
+checkAllKeywordArguments.py
+checkEverything.py
+checkFmcKeywordArguments.py
+checkPyGuymer3KeywordArguments.py
+checkRequiredFiles.py
+commit.sh
+diff.sh
+fortranlib
+grep.sh
+ISO 3166-1.json
+LICENCE.txt
+Natural Earth A2s.json
+Natural Earth A3s.json
+Natural Earth Countries.json
+nubase2020/convertTxt2Json.py
+nubase2020/rawNucs.json
+nubase2020/simple.json
+pre-commit
+pre-push
+pull.sh
+push.sh
+Python 3.10 Standard Modules.json
+Python 3.11 Standard Modules.json
+Python 3.12 Standard Modules.json
+Python 3.13 Standard Modules.json
+Python 3.14 Standard Modules.json
+Python 3.9 Standard Modules.json
+README.md
+remote.sh
+requirements.txt
+src/main.F90
+src/Makefile
+src/run.sh
+status.sh
+surveyGshhgDatasets.py
+surveyGshhgDatasets/gshhgRes=c_gshhgLevel=1.json
+surveyGshhgDatasets/gshhgRes=c_gshhgLevel=2.json
+surveyGshhgDatasets/gshhgRes=c_gshhgLevel=3.json
+surveyGshhgDatasets/gshhgRes=c_gshhgLevel=5.json
+surveyGshhgDatasets/gshhgRes=c_gshhgLevel=6.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=1.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=2.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=3.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=4.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=5.json
+surveyGshhgDatasets/gshhgRes=f_gshhgLevel=6.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=1.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=2.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=3.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=4.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=5.json
+surveyGshhgDatasets/gshhgRes=h_gshhgLevel=6.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=1.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=2.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=3.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=4.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=5.json
+surveyGshhgDatasets/gshhgRes=i_gshhgLevel=6.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=1.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=2.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=3.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=4.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=5.json
+surveyGshhgDatasets/gshhgRes=l_gshhgLevel=6.json
+tag.sh
+test.sh
+tests/astTree.py
+update.sh
+updateModuleList.py
