@@ -33,4 +33,3 @@ surveyGshhgDatasets/gshhgRes=l_gshhgLevel=3.json filter=lfs diff=lfs merge=lfs -
 surveyGshhgDatasets/gshhgRes=l_gshhgLevel=4.json filter=lfs diff=lfs merge=lfs -text
 surveyGshhgDatasets/gshhgRes=l_gshhgLevel=5.json filter=lfs diff=lfs merge=lfs -text
 surveyGshhgDatasets/gshhgRes=l_gshhgLevel=6.json filter=lfs diff=lfs merge=lfs -text
-surveyGshhgDatasets/gshhgRes=*.json filter=lfs diff=lfs merge=lfs -text
