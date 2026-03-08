@@ -30,6 +30,7 @@ checkRequiredFiles.py
 commit.sh
 diff.sh
 fortranlib
+git-files.txt
 grep.sh
 ISO 3166-1.json
 LICENCE.txt
