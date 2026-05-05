@@ -41,6 +41,9 @@ if type pylint 2> /dev/null > /dev/null; then
                 exit 1
             fi
         fi
+
+        # Clean up ...
+        rm "${t}"
     fi
 fi
 
@@ -71,5 +74,8 @@ if type shellcheck 2> /dev/null > /dev/null; then
                 exit 1
             fi
         fi
+
+        # Clean up ...
+        rm "${t}"
     fi
 fi
