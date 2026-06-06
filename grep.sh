@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Source run control ...
+source "${BASH_ENV}" || exit 1
+
 # Check that non-standard programs are installed. "standard" programs are
 # anything that is specified in the POSIX.1-2008 standard (and the IEEE Std
 # 1003.1 standard) or that is a BASH builtin command. Therefore, "non-standard"
@@ -14,7 +17,33 @@ cd "${HOME}/Repositories" || exit 1
 for d in */.git; do
     # Clear the terminal and then run grep ...
     clear
-    readarray -t fnames < <(find "$(dirname "${d}")" -type f 2> /dev/null | grep -v -F -e doc/ -e openflights/ -e ourairports-data/ -e stations/ -e validator/ -e .git/ -e build/ -e .png -e .bak -e .bin -e .jpg -e .pyc -e .o -e .mod -e .pdf -e .ppm -e .pgm -e .pbm -e .csv -e .zip -e DS_Store | sort)
+    readarray -t fnames < <(                                                    \
+        find "$(dirname "${d}")" -type f 2> /dev/null | grep -v -F              \
+        -e .git/                                                                \
+        -e build/                                                               \
+        -e coverage-output/                                                     \
+        -e doc/                                                                 \
+        -e docs/                                                                \
+        -e openflights/                                                         \
+        -e ourairports-data/                                                    \
+        -e stations/                                                            \
+        -e validator/                                                           \
+        -e .bak                                                                 \
+        -e .bin                                                                 \
+        -e .csv                                                                 \
+        -e .jpg                                                                 \
+        -e .mod                                                                 \
+        -e .mp4                                                                 \
+        -e .o                                                                   \
+        -e .pbm                                                                 \
+        -e .pdf                                                                 \
+        -e .pgm                                                                 \
+        -e .png                                                                 \
+        -e .ppm                                                                 \
+        -e .pyc                                                                 \
+        -e .zip                                                                 \
+        -e DS_Store | sort                                                      \
+    )
     grep --color -n "http://" "${fnames[@]}" 2> /dev/null
 
     # Wait for the user to be ready to proceed and then clear the terminal again ...
