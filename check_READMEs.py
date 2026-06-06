@@ -53,6 +53,7 @@ if __name__ == "__main__":
         "matplotlib" : "matplotlib >= 3.5.0",                                   # "labels" was added to "matplotlib.axes.Axes.set_xticks()".
                "PIL" : "pillow >= 8.0.0",                                       # "anchor" was implemented in "PIL.ImageDraw.text()".
          "pyguymer3" : "pyguymer3 >= 0.0.12",                                   # Latest version from https://github.com/Guymer/PyGuymer3
+            "pyproj" : "pyproj >= 2.1.0",                                       # "pyproj.transform" was deprecated.
          "shapefile" : "pyshp",
     }
 
