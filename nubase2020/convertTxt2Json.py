@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Use the proper idiom in the main module ...
-# NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
+# NOTE: See https://docs.python.org/3.13/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
     # Import standard modules ...
     import json
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         rawNucs = {}
 
         # Open dataset ...
-        with open("nubase_4.mas20.txt", "rt", encoding = "utf-8") as fObj:
+        with open("nubase_4.mas20.txt", mode = "rt", encoding = "utf-8") as fObj:
             # Loop over lines in dataset ...
             for line in fObj:
                 # Skip this line if it does not appear to be data ...
@@ -108,7 +108,7 @@ if __name__ == "__main__":
                 rawNucs[key] = rawNuc
 
         # Save raw nuclides database ...
-        with open("rawNucs.json", "wt", encoding = "utf-8") as fObj:
+        with open("rawNucs.json", mode = "wt", encoding = "utf-8") as fObj:
             json.dump(
                 rawNucs,
                 fObj,
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         }
 
         # Load raw nuclides database ...
-        with open("rawNucs.json", "rt", encoding = "utf-8") as fObj:
+        with open("rawNucs.json", mode = "rt", encoding = "utf-8") as fObj:
             rawNucs = json.load(fObj)
 
         # Loop over raw nuclides ...
@@ -190,7 +190,7 @@ if __name__ == "__main__":
             simple["physicalNuclides"][nucKey] = float(rawNuc["A"]) + mass      # [amu]
 
         # Save raw nuclides database ...
-        with open("simple.json", "wt", encoding = "utf-8") as fObj:
+        with open("simple.json", mode = "wt", encoding = "utf-8") as fObj:
             json.dump(
                 simple,
                 fObj,

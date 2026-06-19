@@ -160,6 +160,37 @@ def checkMap(nodeIn, fnameIn, /):
         print(f"\"{fnameIn}\" uses \"map()\" without specifying the {kwArg}.")
 
 # Define function ...
+def checkOpen(nodeIn, fnameIn, /):
+    """
+    Check that all "open()" calls specify the strictness.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
+        return
+    if not isinstance(nodeIn.func, ast.Name):                                   # pylint: disable=E0606
+        return
+
+    # Skip this node if it is not a "open()" call ...
+    if nodeIn.func.id != "open":
+        return
+
+    # Loop over keyword arguments ...
+    for kwArg in ["mode",]:
+        # Skip this node if it sets the "open()" keyword argument ...
+        skip = False
+        for keyword in nodeIn.keywords:
+            if keyword.arg == kwArg:
+                skip = True
+                break
+        if skip:
+            continue
+
+        # Print ...
+        print(f"\"{fnameIn}\" uses \"open()\" without specifying the {kwArg}.")
+
+# Define function ...
 def checkPost(nodeIn, fnameIn, /):
     """
     Check that all "requests.post()" calls specify the timeout.
@@ -257,7 +288,7 @@ def checkZip(nodeIn, fnameIn, /):
         print(f"\"{fnameIn}\" uses \"zip()\" without specifying the {kwArg}.")
 
 # Use the proper idiom in the main module ...
-# NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
+# NOTE: See https://docs.python.org/3.13/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
     # Import standard modules ...
     import argparse
@@ -314,7 +345,7 @@ if __name__ == "__main__":
             continue
 
         # Load the Python script ...
-        with open(fname, "rt", encoding = "utf-8") as fObj:
+        with open(fname, mode = "rt", encoding = "utf-8") as fObj:
             src = fObj.read()
 
         # Parse the Python script ...
@@ -329,6 +360,7 @@ if __name__ == "__main__":
                 checkCartopy(node, fname)
                 checkLegend(node, fname)
                 checkMap(node, fname)
+                checkOpen(node, fname)
                 checkPost(node, fname)
                 checkRun(node, fname)
                 checkZip(node, fname)

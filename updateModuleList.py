@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Use the proper idiom in the main module ...
-# NOTE: See https://docs.python.org/3.12/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
+# NOTE: See https://docs.python.org/3.13/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
 if __name__ == "__main__":
     # Import standard modules ...
     import json
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     modules.sort(key = str.lower)
 
     # Save the module list ...
-    with open(f"Python {sys.version_info.major}.{sys.version_info.minor} Standard Modules.json", "wt", encoding = "utf-8") as fObj:
+    with open(f"Python {sys.version_info.major}.{sys.version_info.minor} Standard Modules.json", mode = "wt", encoding = "utf-8") as fObj:
         json.dump(
             modules,
             fObj,
