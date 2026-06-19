@@ -25,7 +25,8 @@ for d in */.git; do
     cd "$(dirname "${d}")" || exit 1
 
     # Commit everything ...
-    git commit -a
+#     git commit -a
+    git commit \*.sh -m "switch to Python 3.13"
 
     # Change directory ...
     cd "${HOME}/Repositories" || exit 1
