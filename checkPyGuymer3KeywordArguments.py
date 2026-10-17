@@ -75,7 +75,6 @@ if __name__ == "__main__":
             "coastlines_linewidth",     # pyguymer3.geo.add_axis()
             "coastlines_resolution",    # pyguymer3.geo.add_axis()
             "coastlines_zorder",        # pyguymer3.geo.add_axis()
-            "configureAgain",           # Lots of functions.
             "cookies",                  # Lots of functions.
             "crf",                      # pyguymer3.media.images2mp4()
             "ensureNFC",                # Lots of functions.
