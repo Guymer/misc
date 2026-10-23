@@ -70,7 +70,8 @@ def checkCartopy(nodeIn, fnameIn, /):
     if not nodeIn.func.value.id.startswith("ax"):
         return
 
-    # Print message if this node does not set the regrid shape ...
+    # Print message if this node does not set the "regrid_shape" keyword
+    # argument ...
     setsKeyword = False
     for keyword in nodeIn.keywords:
         if keyword.arg == "regrid_shape":
@@ -79,7 +80,7 @@ def checkCartopy(nodeIn, fnameIn, /):
     if not setsKeyword:
         print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call without specifying \"regrid_shape\".")
 
-    # Print message if this node sets the interpolation ...
+    # Print message if this node sets the "interpolation" keyword argument ...
     setsKeyword = False
     for keyword in nodeIn.keywords:
         if keyword.arg == "interpolation":
@@ -88,7 +89,7 @@ def checkCartopy(nodeIn, fnameIn, /):
     if setsKeyword:
         print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"interpolation\".")
 
-    # Print message if this node sets the resample ...
+    # Print message if this node sets the "resample" keyword argument ...
     setsKeyword = False
     for keyword in nodeIn.keywords:
         if keyword.arg == "resample":
@@ -116,7 +117,7 @@ def checkLegend(nodeIn, fnameIn, /):
     if not nodeIn.func.value.id.startswith("ax"):
         return
 
-    # Skip this node if it sets the location ...
+    # Skip this node if it sets the "loc" keyword argument ...
     skip = False
     for keyword in nodeIn.keywords:
         if keyword.arg == "loc":
@@ -145,24 +146,22 @@ def checkMap(nodeIn, fnameIn, /):
     if nodeIn.func.id != "map":
         return
 
-    # Loop over keyword arguments ...
-    for kwArg in ["strict",]:
-        # Skip this node if it sets the "map()" keyword argument ...
-        skip = False
-        for keyword in nodeIn.keywords:
-            if keyword.arg == kwArg:
-                skip = True
-                break
-        if skip:
-            continue
+    # Skip this node if it sets the "strict" keyword argument ...
+    skip = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "strict":
+            skip = True
+            break
+    if skip:
+        return
 
-        # Print ...
-        print(f"\"{fnameIn}\" uses \"map()\" without specifying the {kwArg}.")
+    # Print ...
+    print(f"\"{fnameIn}\" uses \"map()\" without specifying the strictness.")
 
 # Define function ...
 def checkOpen(nodeIn, fnameIn, /):
     """
-    Check that all "open()" calls specify the strictness.
+    Check that all "open()" calls specify the mode.
     """
 
     # Skip this node if it is not a function call (or if it is not an attribute
@@ -176,19 +175,17 @@ def checkOpen(nodeIn, fnameIn, /):
     if nodeIn.func.id != "open":
         return
 
-    # Loop over keyword arguments ...
-    for kwArg in ["mode",]:
-        # Skip this node if it sets the "open()" keyword argument ...
-        skip = False
-        for keyword in nodeIn.keywords:
-            if keyword.arg == kwArg:
-                skip = True
-                break
-        if skip:
-            continue
+    # Skip this node if it sets the "mode" keyword argument ...
+    skip = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "mode":
+            skip = True
+            break
+    if skip:
+        return
 
-        # Print ...
-        print(f"\"{fnameIn}\" uses \"open()\" without specifying the {kwArg}.")
+    # Print ...
+    print(f"\"{fnameIn}\" uses \"open()\" without specifying the mode.")
 
 # Define function ...
 def checkPost(nodeIn, fnameIn, /):
@@ -209,24 +206,23 @@ def checkPost(nodeIn, fnameIn, /):
     if nodeIn.func.value.id != "requests":
         return
 
-    # Loop over keyword arguments ...
-    for kwArg in ["timeout",]:
-        # Skip this node if it sets the "requests.post()" keyword argument ...
-        skip = False
-        for keyword in nodeIn.keywords:
-            if keyword.arg == kwArg:
-                skip = True
-                break
-        if skip:
-            continue
+    # Skip this node if it sets the "timeout" keyword argument ...
+    skip = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "timeout":
+            skip = True
+            break
+    if skip:
+        return
 
-        # Print ...
-        print(f"\"{fnameIn}\" uses \"requests.post()\" without specifying the {kwArg}.")
+    # Print ...
+    print(f"\"{fnameIn}\" uses \"requests.post()\" without specifying the timeout.")
 
 # Define function ...
 def checkRun(nodeIn, fnameIn, /):
     """
-    Check that all "subprocess.run()" calls specify the timeout.
+    Check that all "subprocess.run()" calls specify the encoding, the timeout
+    and whether to check the result.
     """
 
     # Skip this node if it is not a function call (or if it is not an attribute
@@ -244,7 +240,7 @@ def checkRun(nodeIn, fnameIn, /):
 
     # Loop over keyword arguments ...
     for kwArg in ["check", "encoding", "timeout",]:
-        # Skip this node if it sets the "subprocess.run()" keyword argument ...
+        # Skip this keyword argument if it is set ...
         skip = False
         for keyword in nodeIn.keywords:
             if keyword.arg == kwArg:
@@ -254,7 +250,7 @@ def checkRun(nodeIn, fnameIn, /):
             continue
 
         # Print ...
-        print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the {kwArg}.")
+        print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the \"{kwArg}\" keyword argument.")
 
 # Define function ...
 def checkZip(nodeIn, fnameIn, /):
@@ -273,19 +269,17 @@ def checkZip(nodeIn, fnameIn, /):
     if nodeIn.func.id != "zip":
         return
 
-    # Loop over keyword arguments ...
-    for kwArg in ["strict",]:
-        # Skip this node if it sets the "zip()" keyword argument ...
-        skip = False
-        for keyword in nodeIn.keywords:
-            if keyword.arg == kwArg:
-                skip = True
-                break
-        if skip:
-            continue
+    # Skip this node if it sets the "strict" keyword argument ...
+    skip = False
+    for keyword in nodeIn.keywords:
+        if keyword.arg == "strict":
+            skip = True
+            break
+    if skip:
+        return
 
-        # Print ...
-        print(f"\"{fnameIn}\" uses \"zip()\" without specifying the {kwArg}.")
+    # Print ...
+    print(f"\"{fnameIn}\" uses \"zip()\" without specifying the strictness.")
 
 # Use the proper idiom in the main module ...
 # NOTE: See https://docs.python.org/3.13/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
@@ -321,6 +315,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # **************************************************************************
+
+    # TODO: Add checks for "mode" as a keyword argument rather than a positional
+    #       argument.
 
     # Loop over files in folder ...
     for fname in pyguymer3.return_file_list(
