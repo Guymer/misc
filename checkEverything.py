@@ -99,6 +99,30 @@ def checkCartopy(nodeIn, fNameIn, /):
         print(f"\"{fNameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"resample\".")
 
 # Define function ...
+def checkImread(nodeIn, fNameIn, /):
+    """
+    Warn about "matplotlib.pyplot.imread()" calls.
+    """
+
+    # Skip this node if it is not a function call (or if it is not an attribute
+    # call) ...
+    if not isinstance(nodeIn, ast.Call):                                        # pylint: disable=E0606
+        return
+    if not isinstance(nodeIn.func, ast.Attribute):                              # pylint: disable=E0606
+        return
+
+    # Skip this node if it is not a "matplotlib.pyplot.imread()" call ...
+    if nodeIn.func.attr != "imread":
+        return
+    if nodeIn.func.value.attr != "pyplot":
+        return
+    if nodeIn.func.value.value.id != "matplotlib":
+        return
+
+    # Print ...
+    print(f"\"{fNameIn}\" calls \"matplotlib.pyplot.imread()\" when it should call \"PIL.Image.open(..., mode = ...)\".")
+
+# Define function ...
 def checkLegend(nodeIn, fNameIn, /):
     """
     Check that all "ax*.legend()" calls specify the location.
@@ -359,6 +383,7 @@ if __name__ == "__main__":
                 # Check everything ...
                 checkAddArgument(node, fName)
                 checkCartopy(node, fName)
+                checkImread(node, fName)
                 checkLegend(node, fName)
                 checkMap(node, fName)
                 checkOpen(node, fName)
