@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Define function ...
-def checkAddArgument(nodeIn, fnameIn, /):
+def checkAddArgument(nodeIn, fNameIn, /):
     """
     Check that all "parser.add_argument()" calls specify the type.
     """
@@ -39,10 +39,10 @@ def checkAddArgument(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" adds the argument \"{nodeIn.args[0].value}\" without specifying the type.")
+    print(f"\"{fNameIn}\" adds the argument \"{nodeIn.args[0].value}\" without specifying the type.")
 
 # Define function ...
-def checkCartopy(nodeIn, fnameIn, /):
+def checkCartopy(nodeIn, fNameIn, /):
     """
     Check that all "ax*.stock_img()", "ax*.background_img()", "ax*.add_image()",
     "ax*.imshow()" and "ax*.pcolormesh()" calls specify the regrid shape but not
@@ -78,7 +78,7 @@ def checkCartopy(nodeIn, fnameIn, /):
             setsKeyword = True
             break
     if not setsKeyword:
-        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call without specifying \"regrid_shape\".")
+        print(f"\"{fNameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call without specifying \"regrid_shape\".")
 
     # Print message if this node sets the "interpolation" keyword argument ...
     setsKeyword = False
@@ -87,7 +87,7 @@ def checkCartopy(nodeIn, fnameIn, /):
             setsKeyword = True
             break
     if setsKeyword:
-        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"interpolation\".")
+        print(f"\"{fNameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"interpolation\".")
 
     # Print message if this node sets the "resample" keyword argument ...
     setsKeyword = False
@@ -96,10 +96,10 @@ def checkCartopy(nodeIn, fnameIn, /):
             setsKeyword = True
             break
     if setsKeyword:
-        print(f"\"{fnameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"resample\".")
+        print(f"\"{fNameIn}\" has a \"{nodeIn.func.value.id}.{nodeIn.func.attr}()\" call which specifies \"resample\".")
 
 # Define function ...
-def checkLegend(nodeIn, fnameIn, /):
+def checkLegend(nodeIn, fNameIn, /):
     """
     Check that all "ax*.legend()" calls specify the location.
     """
@@ -127,10 +127,10 @@ def checkLegend(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" adds a legend to \"{nodeIn.func.value.id}\" without specifying the location.")
+    print(f"\"{fNameIn}\" adds a legend to \"{nodeIn.func.value.id}\" without specifying the location.")
 
 # Define function ...
-def checkMap(nodeIn, fnameIn, /):
+def checkMap(nodeIn, fNameIn, /):
     """
     Check that all "map()" calls specify the strictness.
     """
@@ -156,10 +156,10 @@ def checkMap(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" uses \"map()\" without specifying the strictness.")
+    print(f"\"{fNameIn}\" uses \"map()\" without specifying the strictness.")
 
 # Define function ...
-def checkOpen(nodeIn, fnameIn, /):
+def checkOpen(nodeIn, fNameIn, /):
     """
     Check that all "open()" calls specify the mode.
     """
@@ -185,10 +185,10 @@ def checkOpen(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" uses \"open()\" without specifying the mode.")
+    print(f"\"{fNameIn}\" uses \"open()\" without specifying the mode.")
 
 # Define function ...
-def checkPost(nodeIn, fnameIn, /):
+def checkPost(nodeIn, fNameIn, /):
     """
     Check that all "requests.post()" calls specify the timeout.
     """
@@ -216,10 +216,10 @@ def checkPost(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" uses \"requests.post()\" without specifying the timeout.")
+    print(f"\"{fNameIn}\" uses \"requests.post()\" without specifying the timeout.")
 
 # Define function ...
-def checkRun(nodeIn, fnameIn, /):
+def checkRun(nodeIn, fNameIn, /):
     """
     Check that all "subprocess.run()" calls specify the encoding, the timeout
     and whether to check the result.
@@ -250,10 +250,10 @@ def checkRun(nodeIn, fnameIn, /):
             continue
 
         # Print ...
-        print(f"\"{fnameIn}\" uses \"subprocess.run()\" without specifying the \"{kwArg}\" keyword argument.")
+        print(f"\"{fNameIn}\" uses \"subprocess.run()\" without specifying the \"{kwArg}\" keyword argument.")
 
 # Define function ...
-def checkZip(nodeIn, fnameIn, /):
+def checkZip(nodeIn, fNameIn, /):
     """
     Check that all "zip()" calls specify the strictness.
     """
@@ -279,7 +279,7 @@ def checkZip(nodeIn, fnameIn, /):
         return
 
     # Print ...
-    print(f"\"{fnameIn}\" uses \"zip()\" without specifying the strictness.")
+    print(f"\"{fNameIn}\" uses \"zip()\" without specifying the strictness.")
 
 # Use the proper idiom in the main module ...
 # NOTE: See https://docs.python.org/3.13/library/multiprocessing.html#the-spawn-and-forkserver-start-methods
@@ -303,7 +303,7 @@ if __name__ == "__main__":
         formatter_class = argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
-        "dname",
+        "dName",
         help = "the folder to check",
         type = str,
     )
@@ -320,29 +320,33 @@ if __name__ == "__main__":
     #       argument.
 
     # Loop over files in folder ...
-    for fname in pyguymer3.return_file_list(
-        args.dname,
+    for fName in pyguymer3.return_file_list(
+        args.dName,
             allowHidden = True,
                   debug = args.debug,
         follow_symlinks = False,
         return_symlinks = False,
     ):
         # Skip files which are not Python scripts ...
-        if not fname.endswith(".py"):
+        if not fName.endswith(".py"):
             continue
 
         # Skip Python scripts which are known Git submodules ...
-        if "/openflights/" in fname:
+        if "/openflights/" in fName:
             continue
-        if "/ourairports-data/" in fname:
+        if "/ourairports-data/" in fName:
             continue
-        if "/stations/" in fname:
+        if "/stations/" in fName:
             continue
-        if "/validator/" in fname:
+        if "/validator/" in fName:
             continue
 
         # Load the Python script ...
-        with open(fname, mode = "rt", encoding = "utf-8") as fObj:
+        with open(
+            fName,
+            encoding = "utf-8",
+                mode = "rt",
+        ) as fObj:
             src = fObj.read()
 
         # Parse the Python script ...
@@ -353,11 +357,11 @@ if __name__ == "__main__":
             # Loop over nodes in the body ...
             for node in ast.walk(body):
                 # Check everything ...
-                checkAddArgument(node, fname)
-                checkCartopy(node, fname)
-                checkLegend(node, fname)
-                checkMap(node, fname)
-                checkOpen(node, fname)
-                checkPost(node, fname)
-                checkRun(node, fname)
-                checkZip(node, fname)
+                checkAddArgument(node, fName)
+                checkCartopy(node, fName)
+                checkLegend(node, fName)
+                checkMap(node, fName)
+                checkOpen(node, fName)
+                checkPost(node, fName)
+                checkRun(node, fName)
+                checkZip(node, fName)
