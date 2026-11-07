@@ -20,10 +20,14 @@ fi
 #         * R0801 - Similar lines in %s files
 
 # Define binaries and check that they exist ...
+fortitude="${HOME}/Library/Python/3.13/bin/fortitude"
 mypy="/opt/local/bin/mypy-3.13"
 pylint="/opt/local/bin/pylint-3.13"
 python="/opt/local/bin/python3.13"
 shellcheck="/opt/local/bin/shellcheck"
+if ! type "${fortitude}" &> /dev/null; then
+    echo "WARNING: the binary defined in \$fortitude does not exist (FORTRAN checks will be skipped)"
+fi
 if ! type "${mypy}" &> /dev/null; then
     echo "WARNING: the binary defined in \$mypy does not exist (Python checks will be skipped)"
 fi
@@ -59,6 +63,28 @@ for g in $(find -X . -name .git 2> /dev/null | sort | cut -c 3-); do
     # Try to find the parent module in the repository and create short-hand ...
     init="$(find "${d}" -type f -name "__init__.py" | sort | head -n 1)"
     prefix="$(dirname "${init}")"
+
+    # **************************************************************************
+
+    # Print warning if there isn't a Fortitude configuration file ...
+    if ! type "${fortitude}" &> /dev/null; then
+        false
+    elif [[ ! -f ${d}/.fortitude.toml ]]; then
+        echo "WARNING: \"${d}\" is missing a Fortitude configuration file"
+    else
+        printf "%-133s : " "Testing \"${d}\" using Fortitude (as a FORTRAN directory)"
+
+        # Run Fortitude on the FORTRAN directory ...
+        ${fortitude} check                                                      \
+            "${d}" &> "${d}/fortitude.log"
+
+        # Check if it is perfect ...
+        if grep -F "All checks passed!" "${d}/fortitude.log" &> /dev/null; then
+            echo "perfect"
+        else
+            grep -F "Number of diagnostics:" "${d}/fortitude.log" | cut -d : -f 2
+        fi
+    fi
 
     # **************************************************************************
 
