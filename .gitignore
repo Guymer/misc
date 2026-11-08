@@ -14,6 +14,7 @@ __pycache__
 # Hide output of Coverage/cProfile/MyPy/PyLint/ShellCheck ...
 .coverage
 cProfile.log
+fortitude.log
 mypy.log
 pylint.log
 shellcheck.log
@@ -26,7 +27,16 @@ shellcheck.log
 *.o
 *.so
 *.so.dSYM
+*.tmp
 src/main
+
+# Ignore Doxygen generated documentation ...
+doxygen.log
+doc
+
+# Ignore Sphinx generated documentation ...
+docs/_autosummary
+docs/_build
 
 # Hide data ...
 nubase2020/nubase_4.mas20.txt
