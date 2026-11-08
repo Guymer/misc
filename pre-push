@@ -18,6 +18,40 @@ fi
 # * Stage 1: Linting                                                           *
 # ******************************************************************************
 
+# Check that Fortitude is installed ...
+if type fortitude 2> /dev/null > /dev/null; then
+    # Check that there is a Fortitude configuration file ...
+    if [ -f .fortitude.toml ]; then
+        # Save a list of all the *.f90 and *.F90 files there are in the
+        # repository ...
+        t="$(mktemp)"
+        git ls-files "*.[fF]90" | grep -v -E 'mod_safe/const.*\.f90' | sort > "${t}"
+
+        # Check that no *.f90 and *.F90 files have a space in their file name ...
+        # NOTE: This would break the upcoming "cat" command.
+        if grep -F " " "${t}"; then
+            echo "ERROR: There is a *.f90 or *.F90 file which has a space in its file name." >&2
+            exit 1
+        fi
+
+        # Count how many *.f90 and *.F90 files there are ...
+        n="$(wc -l "${t}" | cut -f 2 -w)"                                       # [#]
+
+        # Check that there are *.f90 or *.F90 files in the repository ...
+        if [ "${n}" -gt 0 ]; then
+            # Run Fortitude ...
+            echo "Running Fortitude on ${n} *.f90 and *.F90 files ..."
+            if ! fortitude check --silent $(cat "${t}"); then
+                echo "ERROR: Fortitude failed." >&2
+                exit 1
+            fi
+        fi
+
+        # Clean up ...
+        rm "${t}"
+    fi
+fi
+
 # Check that PyLint is installed ...
 if type pylint 2> /dev/null > /dev/null; then
     # Check that there is a PyLint configuration file ...
