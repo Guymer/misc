@@ -14,7 +14,10 @@ PROGRAM main
     CALL sub_allocate_array(arr, "arr", n, n, .TRUE._INT8)
     arr = 1.0e0_REAL64
 
-    WRITE(fmt = '(f9.1)', unit = OUTPUT_UNIT) SUM(arr)
+    WRITE(                                                                      &
+         fmt = "(f9.1)",                                                        &
+        unit = OUTPUT_UNIT                                                      &
+    ) SUM(arr)
 
     ! Clean up ...
     DEALLOCATE(arr)
