@@ -1,5 +1,5 @@
 PROGRAM main
-    USE ISO_FORTRAN_ENV
+    USE, INTRINSIC :: ISO_FORTRAN_ENV
     USE mod_safe,           ONLY:   sub_allocate_array
 
     IMPLICIT NONE
