@@ -1,6 +1,7 @@
 .bashrc
 .config/yt-dlp/config
 .editorconfig
+.fortitude.toml
 .get_iplayer/options
 .gitattributes
 .gitconfig
